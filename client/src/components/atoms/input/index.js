@@ -1,17 +1,24 @@
+import propTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input``;
+const InputTag = styled.input``;
 
-const input = ({ className, children }) => {
+function Input({ className, children, placeholder }) {
   return (
-    <Input
+    <InputTag
       className={className}
       onChange={e => e.target.value}
-      placeholder={children}
+      placeholder={placeholder}
       type={children}
     />
   );
+}
+
+Input.propTypes = {
+  className: propTypes.string.isRequired,
+  children: propTypes.string.isRequired,
+  placeholder: propTypes.string.isRequired,
 };
 
-export default input;
+export default Input;

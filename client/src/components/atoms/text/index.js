@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Text = styled.span``;
+const Label = styled.label``;
 
 const span = ({ className, children }) => {
-  return <Text className={className}>{children}</Text>;
+  return <Label className={className}>{children}</Label>;
 };
 
 export default span;

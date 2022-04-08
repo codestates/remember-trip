@@ -1,10 +1,14 @@
+import propTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const Label = styled.label``;
+const LabelTag = styled.label``;
 
-const span = ({ className, children }) => {
-  return <Label className={className}>{children}</Label>;
+function Label({ children }) {
+  return <LabelTag>{children}</LabelTag>;
+}
+
+Label.propTypes = {
+  children: propTypes.string.isRequired,
 };
-
-export default span;
+export default Label;
