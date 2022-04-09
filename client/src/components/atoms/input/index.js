@@ -4,21 +4,16 @@ import styled from 'styled-components';
 
 const InputTag = styled.input``;
 
-function Input({ className, children, placeholder }) {
+function Input({ type, placeholder, inputHandler }) {
   return (
-    <InputTag
-      className={className}
-      onChange={e => e.target.value}
-      placeholder={placeholder}
-      type={children}
-    />
+    <InputTag onChange={inputHandler} placeholder={placeholder} type={type} />
   );
 }
 
 Input.propTypes = {
-  className: propTypes.string.isRequired,
-  children: propTypes.string.isRequired,
+  type: propTypes.string.isRequired,
   placeholder: propTypes.string.isRequired,
+  inputHandler: propTypes.func.isRequired,
 };
 
 export default Input;

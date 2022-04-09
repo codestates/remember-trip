@@ -19,13 +19,12 @@ const ButtonTag = styled.button`
   }
 `;
 
-function Button({ onClick, className, type }) {
-  return <ButtonTag className={className} onClick={onClick} type={type} />;
+function Button({ onClick, type }) {
+  return <ButtonTag onClick={onClick} type={type} />;
 }
 
 Button.propTypes = {
   onClick: propTypes.func.isRequired,
-  className: propTypes.string.isRequired,
   type: propTypes.string.isRequired,
 };
 

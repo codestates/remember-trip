@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const Linktag = styled(NavLink)``;
 
 function Links() {
-  return <Linktag />;
+  return <Linktag>No Account?</Linktag>;
 }
 
 export default Links;
