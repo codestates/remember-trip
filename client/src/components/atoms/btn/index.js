@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
-const Button = styled.button`
+const ButtonTag = styled.button`
   background-color: rgb(93, 176, 198, 0.645);
   border: solid 2px;
   border-bottom-width: 5px;
@@ -18,12 +19,13 @@ const Button = styled.button`
   }
 `;
 
-const btn = ({ children, onClick, className, type }) => {
-  return (
-    <Button className={className} onClick={onClick} type={type}>
-      {children}
-    </Button>
-  );
+function Button({ onClick, type }) {
+  return <ButtonTag onClick={onClick} type={type} />;
+}
+
+Button.propTypes = {
+  onClick: propTypes.func.isRequired,
+  type: propTypes.string.isRequired,
 };
 
-export default btn;
+export default Button;

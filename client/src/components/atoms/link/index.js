@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Linklist = styled(Link)``;
+const Linktag = styled(NavLink)``;
 
-const link = () => {
-  return (
-    <li>
-      <Linklist to="/">Home</Linklist>
-    </li>
-  );
-};
+function Links() {
+  return <Linktag>No Account?</Linktag>;
+}
 
-export default link;
+export default Links;
