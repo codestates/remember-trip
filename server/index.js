@@ -28,7 +28,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/", user);
-app.use("/myPage", myPage);
+app.use("/mypage", myPage);
 
 //myPage, account, diary (logIn, logOut, signUp, withDrawal)
 
