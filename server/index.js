@@ -5,6 +5,9 @@ const express = require("express");
 const app = express();
 const port = 8080;
 
+const user = require("./routes/user");
+const myPage = require("./routes/myPage");
+
 app.use(express.json());
 app.use(
   cors({
@@ -15,13 +18,10 @@ app.use(
 );
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  return res.status(200).send("Hello World");
-});
+app.use("/", user);
+app.use("/myPage", myPage);
 
-app.get("/user", (req, res) => {
-  return res.status(200).send({data: {username:"holy", age:26, email:"safjsdoi@gmail.com"}})
-});
+//myPage, account, diary (logIn, logOut, signUp, withDrawal)
 
 server = app.listen(port, () => {
   console.log(`Listening on ${port}`);
