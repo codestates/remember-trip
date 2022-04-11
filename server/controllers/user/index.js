@@ -7,35 +7,39 @@ module.exports = {
     // 로그인
     post: async (req, res) => {
       try {
-        const { email, password } = req.body; //이메일과 패스워드를 바디에 실려서 클라이언트로 부터 받아옴
-        if (!email || !password) {
-          // 이메일과 패스워드중 하나라도 없다면 400 상태로 되돌려보냄 (프론트에서 잘 구현해주심)
-          return res.status(400).send("Must Provide All Fields");
+        const { user_id, password } = req.body; //아이디와 패스워드를 클라이언트로 부터 받아옴
+        if (!user_id || !password) {
+          // 이메일과 패스워드중 하나라도 없다면 400 상태로 되돌려보냄
+          return res.status(400).send("Insufficient parameters supplied");
         }
 
-        const result = await user.findOne({ where: { email, password } }); //가입된 유저가 맞는지 확인 과정
+        const result = await user.findOne({ where: { user_id, password } }); //가입된 유저가 맞는지 확인 과정
 
         if (result) {
+          const payload = {
+            id: result.id,
+            user_id: result.user_id,
+            password: result.password,
+          };
           //있다면 200 없다면 401
-          //있다면 토큰을 같이 보내준다
-          const accessToken = jwt.sign(
-            result.toJSON(),
-            process.env.ACCESS_SECRET,
-            { expiresIn: "1h" }
-          );
-          const refreshToken = jwt.sign(
-            result.toJSON(),
-            process.env.REFRESH_SECRET,
-            { expiresIn: "1d" }
-          );
+          //있다면 토큰을 같이 보내준
+          const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, {
+            expiresIn: "1h",
+          });
+          const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, {
+            expiresIn: "1d",
+          });
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
+            sameSite: "none",
+            secure: true,
           });
-          return res
-            .status(200)
-            .send({ data: { accessToken }, message: "Welcome" });
+          return res.status(200).send({
+            data: { accessToken },
+            message: `환영합니다`,
+          });
         } else {
-          return res.status(401).send({ message: "wrong email or password" });
+          return res.status(401).send({ message: "wrong user_id or password" });
         }
       } catch (err) {
         // 서버에러
@@ -65,29 +69,28 @@ module.exports = {
     // 회원가입
     post: async (req, res) => {
       try {
-        const { name, email, password } = req.body; //
+        const { user_id, password } = req.body; //
 
-        if (!name || !email || !password) {
-          return res.status(400).send("Must Provide All Fields"); //api 추가
+        if (!user_id || !password) {
+          return res.status(400).send("Insufficient parameters supplied"); //api 추가
         }
-        const userInfo = await user.findOne({ where: { email } }); //해당 이메일로 회원정보 중복 조회
+        const userInfo = await user.findOne({ where: { user_id } }); //해당 아이디로 회원정보 중복 조회
 
         if (userInfo) {
-          //해당 이메일로 벌써 가입한적이 있다면
+          //해당 아이디로 벌써 가입한적이 있다면
           return res
             .status(400)
             .send({ data: null, message: "email already exists" });
         }
 
         await user.create({
-          name,
-          email,
+          user_id,
           password,
         });
 
         return res
           .status(201)
-          .send({ userInfo: { name, email }, message: "signup ok" });
+          .send({message: "signup ok" });
       } catch (err) {
         console.error(err);
         return res
@@ -101,18 +104,18 @@ module.exports = {
     // 회원탈퇴
     delete: async (req, res) => {
       try {
-        const { name, email, password } = req.body;
+        const { user_id, password } = req.body;
 
-        if (!name || !email || !password) {
-          return res.status(400).send("Must Provide All Fields");
+        if (!user_id || !password) {
+          return res.status(400).send("Insufficient parameters supplied");
         }
 
         const userInfo = await user.findOne({
-          where: { name, email, password },
+          where: { user_id, password },
         });
 
         if (userInfo) {
-          await userInfo.destroy({ where: { name, email, password } });
+          await userInfo.destroy({ where: { user_id, password } });
           return res.status(200).send({ message: "Account Deleted" });
         } else {
           return res.status(401).send({ message: "Incorrect Info" });
