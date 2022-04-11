@@ -1,4 +1,4 @@
-const { trip, user, diary_hashtag } = require("../../models");
+const { trip, user } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
@@ -21,7 +21,28 @@ module.exports = {
         message: "ok",
       });
     } catch (err) {
-      //토큰 만료
+      const refreshToken = req.cookies.jwt;
+      if (refreshToken) {
+        let userInfo;
+        let newAccessToken;
+        try {
+          userInfo = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+          newAccessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
+        } catch (err) {
+          return res.status(401).send("Please Log In Again");
+        }
+
+        const { id } = userInfo;
+        const trips = await trip.findAll({
+          where: { user_id: id },
+        });
+        return res.status(200).send({
+          accessToken: newAccessToken,
+          userInfo: { id },
+          trips,
+          message: "ok, accessToken issued again",
+        });
+      }
       return null;
     }
   },
@@ -58,11 +79,34 @@ module.exports = {
   },
 
   post: async (req, res) => {
-    await diary_hashtag.create({
-      diary_id: 1,
-      hashtag_id: 3,
+    const authorization = req.headers[authorization];
+    if (!authorization) {
+      //토큰이 아예 안왔다면
+      return res.status(401).send({ message: "No Token" });
+    }
+
+    const token = authorization.split(" ")[1];
+    let id;
+    try {
+      const userInfo = jwt.verify(token, process.env.ACCESS_SECRET);
+      id = userInfo.id;
+    } catch (err) {
+      console.err(err);
+      return res.status(401).send({ message: "Invalid Token" });
+    }
+    const { country, start_date, end_date } = req.body;
+    await trip.create({
+      user_id: id,
+      country,
+      start_date,
+      end_date,
     });
 
-    return res.status(200).send("Here");
+    return res.status(200).send({
+      tripInfo: {
+        id: 0,
+      },
+      message: "Posted Successfully",
+    });
   },
 };
