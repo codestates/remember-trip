@@ -1,21 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const trip = sequelize.define(
-    "trip",
+  const diary_hashtag = sequelize.define(
+    "diary_hashtag",
     {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
-      },
-      country: {
-        type: DataTypes.STRING,
-      },
-      start_date: {
-        type: DataTypes.DATE,
-      },
-      end_date: {
-        type: DataTypes.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -31,10 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       // charset: "utf8", // 한국어 설정
       // collate: "utf8_general_ci", // 한국어 설정
-      tableName: "trip", // 테이블 이름
+      tableName: "diary_hashtag", // 테이블 이름
       timestamps: true, // createAt & updateAt 활성화
     }
   );
 
-  return trip;
+  return diary_hashtag;
 };
