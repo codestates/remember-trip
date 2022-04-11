@@ -1,20 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
 
-  const user = sequelize.define("user", {
+  const account = sequelize.define("account", {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
+    category: {
       type: DataTypes.STRING,
     },
-    email: {
+    item_name: {
       type: DataTypes.STRING,
     },
-    password: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.INTEGER
+    },
+    paid_person: {
+      type: DataTypes.STRING
+    },
+    currency: {
+      type: DataTypes.STRING
+    },
+    write_date: {
+      type: DataTypes.DATE
     },
     createdAt: {
       allowNull: false,
@@ -27,13 +36,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
     },
   }, {
-    tableName: "user", // 테이블 이름
+    // charset: "utf8", // 한국어 설정
+    // collate: "utf8_general_ci", // 한국어 설정
+    tableName: "account", // 테이블 이름
     timestamps: true, // createAt & updateAt 활성화
   });
 
-  user.associate = models => {
-    user.hasMany(models.trip, {foreignKey : "user_id", sourceKey : "id"});
-  };
+  account.associate = models => {
+    account.belongsTo(models.trip, {foreignKey : "trip_id", sourceKey : "id"});
+  }; // trip : diary = 1 : N
 
-  return user;
+  return account;
 };
