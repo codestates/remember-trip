@@ -8,11 +8,6 @@ module.exports = {
     post: async (req, res) => {
       try {
         const { user_id, password } = req.body; //아이디와 패스워드를 클라이언트로 부터 받아옴
-        if (!user_id || !password) {
-          // 이메일과 패스워드중 하나라도 없다면 400 상태로 되돌려보냄
-          return res.status(400).send("Insufficient parameters supplied");
-        }
-
         const result = await user.findOne({ where: { user_id, password } }); //가입된 유저가 맞는지 확인 과정
 
         if (result) {
@@ -69,18 +64,14 @@ module.exports = {
     // 회원가입
     post: async (req, res) => {
       try {
-        const { user_id, password } = req.body; //
-
-        if (!user_id || !password) {
-          return res.status(400).send("Insufficient parameters supplied"); //api 추가
-        }
+        const { user_id, password } = req.body;
         const userInfo = await user.findOne({ where: { user_id } }); //해당 아이디로 회원정보 중복 조회
 
         if (userInfo) {
           //해당 아이디로 벌써 가입한적이 있다면
           return res
             .status(400)
-            .send({ data: null, message: "email already exists" });
+            .send({ data: null, message: "user_id already exists" });
         }
 
         await user.create({
@@ -88,9 +79,7 @@ module.exports = {
           password,
         });
 
-        return res
-          .status(201)
-          .send({message: "signup ok" });
+        return res.status(201).send({ message: "signup ok" });
       } catch (err) {
         console.error(err);
         return res
@@ -105,10 +94,6 @@ module.exports = {
     delete: async (req, res) => {
       try {
         const { user_id, password } = req.body;
-
-        if (!user_id || !password) {
-          return res.status(400).send("Insufficient parameters supplied");
-        }
 
         const userInfo = await user.findOne({
           where: { user_id, password },
