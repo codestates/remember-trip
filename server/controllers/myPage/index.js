@@ -1,4 +1,4 @@
-const { trip, user } = require("../../models");
+const { trip, user, diary_hashtag } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
@@ -58,6 +58,11 @@ module.exports = {
   },
 
   post: async (req, res) => {
+    await diary_hashtag.create({
+      diary_id: 1,
+      hashtag_id: 3,
+    });
+
     return res.status(200).send("Here");
   },
 };

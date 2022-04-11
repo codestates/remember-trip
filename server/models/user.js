@@ -1,3 +1,5 @@
+const trip = require("./trip");
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define(
     "user",
@@ -26,14 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      // charset: "utf8", // 한국어 설정
       tableName: "user", // 테이블 이름
       timestamps: true, // createAt & updateAt 활성화
     }
   );
-
-  user.associate = (models) => {
-    user.hasMany(models.trip, { foreignKey: "user_id", sourceKey: "id" });
-  };
 
   return user;
 };
