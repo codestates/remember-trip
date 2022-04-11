@@ -1,12 +1,28 @@
-const { user } = require("../../models");
+const { trip } = require("../../models");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   get: async (req, res) => {
+    const authorization = req.headers["authorization"];
+    if (!authorization) {
+      //토큰이 아예 안왔다면
+      return res.status(401).send({ message: "No Token" });
+    }
+    const token = authorization.split(" ")[1];
     try {
-      const result = await user.findAll();
-      return res.status(200).send(result);
-    } catch {
-      return res.status(200).send("No User Found");
+      const userInfo = jwt.verify(token, process.env.ACCESS_SECRET);
+      const { id, name, email } = userInfo;
+      const trips = await trip.findAll({
+        where: { user_id: id },
+      });
+      return res.status(200).send({
+        userInfo: { id, name, email },
+        trips,
+        message: "ok",
+      });
+    } catch (err) {
+      //토큰 만료
+      return null;
     }
   },
 
@@ -26,5 +42,9 @@ module.exports = {
       await userInfo.save();
       return res.status(200).send("Password Successfully Changed");
     }
+  },
+
+  post: async (req, res) => {
+    return res.status(200).send("Here");
   },
 };
