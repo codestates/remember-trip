@@ -1,7 +1,11 @@
-// const express = require("express");
-// const router = express.Router();
-// const controllers = require("../controllers/myPage");
+const express = require("express");
+const router = express.Router();
+const controllers = require("../controllers/myPage");
 
-// router.get("/", controllers.get);
+router.get("/", controllers.get);
 
-// module.exports = router;
+router.patch("/", controllers.patch);
+
+router.post("/trip", controllers.post);
+
+module.exports = router;
