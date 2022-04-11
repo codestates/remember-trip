@@ -40,13 +40,13 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.user.hasMany(db.trip, { foreignKey: "user_Id", sourceKey: "id" });
-db.trip.belongsTo(db.user, { foreignKey: "user_Id", sourceKey: "id" });
-db.trip.hasMany(db.diary, { foreignKey: "trip_Id", sourceKey: "id" });
-db.trip.hasMany(db.account, { foreignKey: "trip_id", sourceKey: "id" });
-db.diary.belongsTo(db.trip, { foreignKey: "trip_Id", sourceKey: "id" });
-db.diary.belongsTo(db.trip, { foreignKey: "trip_Id", sourceKey: "id" });
-db.account.belongsTo(db.trip, { foreignKey: "trip_id", sourceKey: "id" });
+db.user.hasMany(db.trip, { foreignKey: "user_id" });
+db.trip.belongsTo(db.user, { foreignKey: "user_id" });
+db.trip.hasMany(db.diary, { foreignKey: "trip_id" });
+db.trip.hasMany(db.account, { foreignKey: "trip_id" });
+db.diary.belongsTo(db.trip, { foreignKey: "trip_id" });
+db.diary.belongsTo(db.trip, { foreignKey: "trip_id" });
+db.account.belongsTo(db.trip, { foreignKey: "trip_id" });
 db.diary.belongsToMany(db.hashtag, {
   through: "diary_hashtag",
   foreignKey: "diary_id",
