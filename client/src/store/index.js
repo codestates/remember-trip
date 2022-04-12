@@ -37,10 +37,19 @@ function Store({ children }) {
     setIsLogIn(false);
   };
 
+  const totalCostHandler = data => {
+    setTotalCost(data);
+  };
+
+  const funcs = {
+    loginHandler,
+    logoutHandler,
+    issueCountry,
+    totalCostHandler,
+  };
+
   return (
-    <stateContext.Provider
-      value={{ state, loginHandler, logoutHandler, issueCountry }}
-    >
+    <stateContext.Provider value={{ state, funcs }}>
       {children}
     </stateContext.Provider>
   );
