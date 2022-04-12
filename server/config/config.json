@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234",
+    "username": "remember",
+    "password": "remember123",
     "database": "database_development",
-    "host": "127.0.0.1",
+    "host": "remembertrip.clrcjejkgt1l.ap-northeast-2.rds.amazonaws.com",
+    "port" : 13306,
     "dialect": "mysql",
     "timezone": "+09:00",
     "dialectOptions":{
@@ -13,10 +14,11 @@
     }
   },
   "test": {
-    "username": "root",
-    "password": "1234",
+    "username": "remember",
+    "password": "remember123",
     "database": "database_test",
-    "host": "127.0.0.1",
+    "host": "remembertrip.clrcjejkgt1l.ap-northeast-2.rds.amazonaws.com",
+    "port" : 13306,
     "dialect": "mysql",
     "timezone": "+09:00",
     "dialectOptions":{
@@ -26,10 +28,11 @@
     }
   },
   "production": {
-    "username": "root",
-    "password": "1234",
+    "username": "remember",
+    "password": "remember123",
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": "remembertrip.clrcjejkgt1l.ap-northeast-2.rds.amazonaws.com",
+    "port" : 13306,
     "dialect": "mysql",
     "timezone": "+09:00",
     "dialectOptions":{
