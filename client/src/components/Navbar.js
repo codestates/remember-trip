@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const NavTag = styled.nav``;
 
-function Navbar({ className }) {
+function Navbar() {
   return (
-    <NavTag className={className}>
+    <NavTag>
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -24,7 +23,4 @@ function Navbar({ className }) {
   );
 }
 
-Navbar.propTypes = {
-  className: propTypes.string.isRequired,
-};
 export default Navbar;
