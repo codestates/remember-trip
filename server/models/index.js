@@ -40,22 +40,24 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.user.hasMany(db.trip, { foreignKey: "user_id" });
-db.trip.belongsTo(db.user, { foreignKey: "user_id" });
-db.trip.hasMany(db.diary, { foreignKey: "trip_id" });
-db.trip.hasMany(db.account, { foreignKey: "trip_id" });
-db.diary.belongsTo(db.trip, { foreignKey: "trip_id" });
-db.diary.belongsTo(db.trip, { foreignKey: "trip_id" });
-db.account.belongsTo(db.trip, { foreignKey: "trip_id" });
+db.user.hasMany(db.trip, { onDelete: "cascade", foreignKey: "user_id" });
+db.trip.belongsTo(db.user, { onDelete: "cascade", foreignKey: "user_id" });
+db.trip.hasMany(db.diary, { onDelete: "cascade", foreignKey: "trip_id" });
+db.trip.hasMany(db.account, { onDelete: "cascade", foreignKey: "trip_id" });
+db.diary.belongsTo(db.trip, { onDelete: "cascade", foreignKey: "trip_id" });
+db.diary.belongsTo(db.trip, { onDelete: "cascade", foreignKey: "trip_id" });
+db.account.belongsTo(db.trip, { onDelete: "cascade", foreignKey: "trip_id" });
 db.diary.belongsToMany(db.hashtag, {
   through: "diary_hashtag",
   foreignKey: "diary_id",
   sourceKey: "id",
+  onDelete: "cascade",
 });
 db.hashtag.belongsToMany(db.diary, {
   through: "diary_hashtag",
   foreignKey: "hashtag_id",
   sourceKey: "id",
+  onDelete: "cascade",
 });
 
 db.sequelize = sequelize;

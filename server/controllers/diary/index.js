@@ -1,4 +1,4 @@
-const { trip } = require("../../models");
+const { diary } = require("../../models");
 const { isAuthorized } = require("../tokenHandler");
 
 module.exports = {
@@ -8,51 +8,49 @@ module.exports = {
       //토큰이 없거나 검증된 토큰이 아닌경우
       return res.status(401).send("Invalid Token");
     }
-    const trips = await trip.findAll({
-      where: { user_id: userInfo.id },
+
+    const { trip_id } = req.body;
+
+    const diaries = await diary.findAll({
+      where: { trip_id },
     });
 
-    return res.status(200).send({
-      trips,
-    });
+    return res.status(200).send({ diaries });
   },
 
   post: async (req, res) => {
     const userInfo = isAuthorized(req);
-
     if (!userInfo) {
       //토큰이 없거나 검증된 토큰이 아닌경우
       return res.status(401).send("Invalid Token");
     }
 
-    const { country, start_date, end_date } = req.body;
-    const createdTrip = await trip.create({
-      user_id: userInfo.id,
-      country,
-      start_date,
-      end_date,
+    const { location, content, write_date, trip_id } = req.body;
+    const diaryInfo = await diary.create({
+      location,
+      content,
+      write_date,
+      trip_id,
     });
 
     return res.status(200).send({
-      tripInfo: {
-        id: createdTrip.id,
-      },
-      message: "Posted Successfully",
+      diary_id: diaryInfo.id,
+      message: "post succesfully created",
     });
   },
 
   delete: async (req, res) => {
     const userInfo = isAuthorized(req);
-
     if (!userInfo) {
+      //토큰이 없거나 검증된 토큰이 아닌경우
       return res.status(401).send("Invalid Token");
     }
 
     try {
-      await trip.destroy({
-        where: { id: req.body.trip_id },
+      await diary.destroy({
+        where: { id: req.body.diary_id },
       });
-      return res.status(200).send({ message: "Trip Deleted" });
+      return res.status(200).send({ message: "diary Deleted" });
     } catch (err) {
       return res.status(401).send({ message: "Incorrect Info" });
     }

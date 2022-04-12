@@ -8,6 +8,8 @@ const { sequelize } = require("./models");
 
 const user = require("./routes/user");
 const myPage = require("./routes/myPage");
+const account = require("./routes/account");
+const diary = require("./routes/diary");
 
 sequelize
   .sync({ force: false })
@@ -30,8 +32,8 @@ app.use(cookieParser());
 
 app.use("/", user);
 app.use("/mypage", myPage);
-
-//myPage, account, diary (logIn, logOut, signUp, withDrawal)
+app.use("/account", account);
+app.use("/diary", diary);
 
 server = app.listen(port, () => {
   console.log(`Listening on ${port}`);
