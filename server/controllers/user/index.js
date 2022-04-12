@@ -95,16 +95,10 @@ module.exports = {
       try {
         const { user_id, password } = req.body;
 
-        const userInfo = await user.findOne({
+        await user.destroy({
           where: { user_id, password },
         });
-
-        if (userInfo) {
-          await userInfo.destroy({ where: { user_id, password } });
-          return res.status(200).send({ message: "Account Deleted" });
-        } else {
-          return res.status(401).send({ message: "Incorrect Info" });
-        }
+        return res.status(200).send({ message: "Account Deleted" });
       } catch (err) {
         console.error(err);
         return res
