@@ -17,7 +17,7 @@ function MyPageList(props) {
   return (
     <div>
       {props.country}Trip, total{props.totalCost},
-      {moment(startDate).diff(moment(endDate), 'days')}days
+      {moment(endDate).diff(moment(startDate), 'days')}days
     </div>
   );
 }

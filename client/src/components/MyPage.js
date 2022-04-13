@@ -76,8 +76,8 @@ function MyPage() {
               key={el.id}
               country={el.country}
               totalCost={el.totalPrice}
-              start={el.start_date}
-              end={el.end_date}
+              start_date={el.start_date}
+              end_date={el.end_date}
             />
           ))
         : 'Not LogIn'}
