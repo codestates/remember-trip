@@ -1,19 +1,23 @@
 const { user } = require("../../models");
-const { isAuthorized } = require("../tokenHandler");
 
 module.exports = {
   patch: async (req, res) => {
-    const userInfo = isAuthorized(req);
-    if (!userInfo) {
-      //토큰이 없거나 검증된 토큰이 아닌경우
-      return res.status(401).send("Invalid Token");
+    try {
+      const { user_id, password, newpassword } = req.body;
+      const userInfo = await user.findOne({
+        where: { user_id, password },
+      });
+
+      if (!userInfo) {
+        return res.status(401).send("Wrong user_id or password");
+      } else {
+        await userInfo.update({ password: newpassword });
+        await userInfo.save();
+        return res.status(200).send("password change succeeded");
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send("something went wrong");
     }
-
-    const currUser = await user.findOne({
-      where: { user_id: userInfo.user_id, password: userInfo.password },
-    });
-
-    await currUser.update({ password: req.body.newpassword });
-    return res.status(200).send("Password Successfuly Changed");
   },
 };
