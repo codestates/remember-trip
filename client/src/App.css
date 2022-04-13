@@ -1,11 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");
 
 body {
   background-color: #f6f6f6;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
+
+  min-height: 100vh;
+  margin: 0px;
+}
+
+#root {
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+@media (min-width: 900px) {
+  #root {
+    width: 700px;
+  }
+}
+
+@media (max-width: 900px) {
+  #root {
+    width: 80vw;
+  }
+}
+
+#root {
+  font-family: "Gowun Batang", serif;
+  font-size: 85%;
+  min-height: 100vh;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* ---------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");
+
+body {
+  background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gowun Batang", serif;
 
   min-height: 100vh;
   margin: 0px;
@@ -29,19 +68,16 @@ body {
 }
 
 .App {
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   font-size: 85%;
   min-height: 100vh;
   padding-left: 30px;
   padding-right: 30px;
 }
 
-/* SignIn */
-
-/* BUTTON✨ */
-
+/* BUTTON✨*/
 .AccountButton {
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -103,7 +139,7 @@ body {
 }
 
 .AccountHeader button {
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
 }
 
 /* DiaryList */
@@ -137,7 +173,7 @@ body {
 
   cursor: pointer;
 
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   font-size: 18px;
 }
 
@@ -208,7 +244,7 @@ body {
 
 /* AccountEditor */
 .AccountEditor textarea {
-  font-family: '';
+  font-family: "";
 }
 
 .AccountEditor h4 {
@@ -221,7 +257,7 @@ body {
   border-radius: 5px;
   background-color: rgba(127, 167, 217, 0.148);
 
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   font-weight: bold;
   font-size: 15px;
 
@@ -240,7 +276,7 @@ body {
 }
 
 .AccountEditor textarea {
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   font-size: 20px;
   margin-top: 20px;
   padding: 20px;
@@ -320,7 +356,7 @@ body {
   border-left: none;
   border-right: none;
 
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   font-size: 20px;
   outline: none;
 }
@@ -332,7 +368,7 @@ body {
 .accountSubmit {
   background-color: white;
 
-  font-family: 'Gowun Batang', serif;
+  font-family: "Gowun Batang", serif;
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -345,4 +381,71 @@ body {
   font-size: 30px;
 
   white-space: nowrap;
+}
+
+/* ----------------------------------------------- */
+.Navbar {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  min-width: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.Navbar div {
+  font-size: 30px;
+}
+
+.Navbar_1:hover {
+  border-bottom: 1px solid blue;
+  transition: all 0.2s;
+  transform: scale(1.3);
+  border-color: #6fa8ed;
+}
+
+.Navbar_2:hover {
+  border-bottom: 1px solid blue;
+  transition: all 0.2s;
+  transform: scale(1.3);
+  border-color: #6fa8ed;
+}
+
+.Navbar_3:hover {
+  border-bottom: 1px solid blue;
+  transition: all 0.2s;
+  transform: scale(1.3);
+  border-color: #6fa8ed;
+}
+
+.Navbar_4:hover {
+  border-bottom: 1px solid blue;
+  transition: all 0.2s;
+  transform: scale(1.3);
+  border-color: #6fa8ed;
+}
+
+.Home {
+  text-align: center;
+}
+
+.HomeH1 {
+  height: 70vh;
+}
+
+.SignLinkBox {
+  display: flex;
+  justify-content: center;
+}
+
+.SignLinkBox span {
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.SignLinkBox span:hover {
+  border-bottom: 1px solid blue;
+  transform: scale(1.05);
+  border-color: #6fa8ed;
 }
