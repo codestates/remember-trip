@@ -10,7 +10,7 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
-      const { trip_id } = req.body;
+      const { trip_id } = req.query;
 
       const diaries = await diary.findAll({
         where: { trip_id },
@@ -51,6 +51,8 @@ module.exports = {
 
   delete: async (req, res) => {
     try {
+      console.log(req.headers);
+      console.log(req.body);
       const userInfo = isAuthorized(req);
       if (!userInfo) {
         //토큰이 없거나 검증된 토큰이 아닌경우

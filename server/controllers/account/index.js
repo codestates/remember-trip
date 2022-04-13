@@ -10,7 +10,7 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
-      const { trip_id } = req.body;
+      const { trip_id } = req.query;
 
       const accounts = await account.findAll({
         where: { trip_id },
