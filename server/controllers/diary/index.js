@@ -51,8 +51,6 @@ module.exports = {
 
   delete: async (req, res) => {
     try {
-      console.log(req.headers);
-      console.log(req.body);
       const userInfo = isAuthorized(req);
       if (!userInfo) {
         //토큰이 없거나 검증된 토큰이 아닌경우
