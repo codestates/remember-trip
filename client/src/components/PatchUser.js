@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
+function PatchUser() {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
+  const [newPwd, setNewPwd] = useState('');
   const [confirmPwd, setConfirmPwd] = useState('');
   const [errorMessage, setErrorMessage] = useState({
     idError: '',
     pwdError: '',
+    newPwdError: '',
     confirmPwdError: '',
   });
 
@@ -22,11 +24,15 @@ function SignUp() {
     setPwd(event.currentTarget.value);
   };
 
+  const onNewPasswordHandler = event => {
+    setNewPwd(event.currentTarget.value);
+  };
+
   const onConfirmPasswordHandler = event => {
     setConfirmPwd(event.currentTarget.value);
   };
 
-  const { idError, pwdError, confirmPwdError } = errorMessage;
+  const { idError, pwdError, newPwdError, confirmPwdError } = errorMessage;
 
   const inputRegexs = {
     idReg: /^[A-za-z0-9]{5,15}$/g,
@@ -50,8 +56,9 @@ function SignUp() {
   const onReset = useCallback(() => {
     setId('');
     setPwd('');
+    setNewPwd('');
     setConfirmPwd('');
-  }, [setId, setPwd, setConfirmPwd]);
+  }, [setId, setPwd, setNewPwd, setConfirmPwd]);
 
   /* 아이디 체크 */
   useEffect(() => {
@@ -84,9 +91,24 @@ function SignUp() {
     }
   }, [pwd]);
 
+  useEffect(() => {
+    if (validationCheck(newPwd, inputRegexs.pwdReg) || newPwd === '') {
+      setErrorMessage({
+        ...errorMessage,
+        newPwdError: '',
+      });
+    } else {
+      setErrorMessage({
+        ...errorMessage,
+        newPwdError:
+          '비밀번호는 최소 하나의 문자 및 하나의 숫자로 8자 이상이여야 합니다.',
+      });
+    }
+  }, [newPwd]);
+
   /* 비밀번호 확인 체크 */
   useEffect(() => {
-    if (pwd === confirmPwd || confirmPwd === '') {
+    if (newPwd === confirmPwd || confirmPwd === '') {
       setErrorMessage({
         ...errorMessage,
         confirmPwdError: '',
@@ -102,7 +124,7 @@ function SignUp() {
   const onSignUp = event => {
     event.preventDefault();
 
-    if (!id || !pwd || !confirmPwd) {
+    if (!id || !pwd || !newPwd || !confirmPwd) {
       alert('모든 값을 정확하게 입력해주세요');
       return;
     }
@@ -111,7 +133,7 @@ function SignUp() {
       alert('아이디가 형식에 맞지 않습니다');
       return;
     }
-    if (pwdError) {
+    if (pwdError || newPwdError) {
       alert('비밀번호가 형식에 맞지 않습니다');
       return;
     }
@@ -120,17 +142,17 @@ function SignUp() {
       return;
     }
 
-    alert('회원 가입 완료');
-
-    axios.post('https://www.remembertrip.tk/signup', {
-      user_id: id,
-      password: pwd,
-    });
-
-    console.log('Id', id);
-    console.log('Password', pwd);
-    navigate('/sign-in');
-    onReset();
+    axios
+      .patch('https://www.remembertrip.tk/mypage', {
+        user_id: id,
+        password: pwd,
+        newpassword: newPwd,
+      })
+      .then(() => {
+        alert('회원정보 수정 완료');
+        navigate('/sign-in');
+        onReset();
+      });
   };
 
   return (
@@ -144,7 +166,7 @@ function SignUp() {
       }}
     >
       <form style={{ display: 'flex', flexDirection: 'column' }}>
-        <h1>회원가입</h1>
+        <h1>회원정보 수정</h1>
         <label htmlFor="inputId">아이디</label>
         <input
           id="inputId"
@@ -155,7 +177,7 @@ function SignUp() {
           required
         />
         {idError ? errorMessage.idError : ''}
-        <label htmlFor="imputPwd">비밀번호</label>
+        <label htmlFor="imputPwd">현재 비밀번호</label>
         <input
           id="inputPwd"
           type="password"
@@ -165,6 +187,16 @@ function SignUp() {
           required
         />
         {pwdError ? errorMessage.pwdError : ''}
+        <label htmlFor="imputPwd">새로운 비밀번호</label>
+        <input
+          id="inputPwd"
+          type="password"
+          placeholder="비밀번호를 입력하세요"
+          value={newPwd}
+          onChange={onNewPasswordHandler}
+          required
+        />
+        {newPwdError ? errorMessage.newPwdError : ''}
         <label htmlFor="inputCpwd">비밀번호 확인</label>
         <input
           id="inputCpwd"
@@ -176,14 +208,11 @@ function SignUp() {
         />
         {confirmPwdError ? errorMessage.confirmPwdError : ''}
         <button type="submit" value="가입" onClick={onSignUp}>
-          SignUp
+          수정
         </button>
-        <Link to="/sign-in">
-          <span>already have?</span>
-        </Link>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default PatchUser;

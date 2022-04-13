@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ReactFlagsSelect from 'react-flags-select';
 import Modal from 'react-modal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { stateContext } from '../store';
 
 const customStyles = {
@@ -18,12 +20,12 @@ const customStyles = {
 function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const context = useContext(stateContext);
 
-  console.log(context);
-
   let subtitle;
-
+  console.log(context.state);
   function openModal() {
     setIsOpen(true);
   }
@@ -48,6 +50,8 @@ function Home() {
         </Link>
         {context.state.isLogIn ? (
           <>
+            {context.funcs.getTrip()}
+            {console.log(context.state.tripList)}
             <span onClick={openModal}>시작하기</span>
             <Modal
               isOpen={modalIsOpen}
@@ -59,13 +63,37 @@ function Home() {
               <ReactFlagsSelect
                 selected={selected}
                 onSelect={data => {
-                  context.issueCountry(data);
+                  context.funcs.issueCountry(data);
                   setSelected(data);
                 }}
                 fullWidth={false}
               />
+              <DatePicker
+                selected={startDate}
+                onChange={date => {
+                  setStartDate(date);
+                  context.funcs.startDateHandler(date);
+                }}
+              />
+              ~
+              <DatePicker
+                selected={endDate}
+                onChange={date => {
+                  setEndDate(date);
+                  context.funcs.endDateHandler(date);
+                }}
+              />
               <label htmlFor="total-cost">Total</label>
-              <input id="total-coast" type="number" />
+              <input
+                id="total-coast"
+                type="number"
+                onChange={e => context.funcs.totalCostHandler(e.target.value)}
+              />
+              {/* <Link to="/mypage"> */}
+              <button type="button" onClick={context.funcs.startTrip}>
+                Start
+              </button>
+              {/* </Link> */}
             </Modal>
           </>
         ) : (

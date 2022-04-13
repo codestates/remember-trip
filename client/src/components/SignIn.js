@@ -7,7 +7,7 @@ function SignIn() {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
 
-  const { loginHandler } = useContext(stateContext);
+  const context = useContext(stateContext);
 
   const navigate = useNavigate();
 
@@ -33,22 +33,24 @@ function SignIn() {
     }
 
     axios
-      .post('http://localhost:8080/signin', {
+      .post('https://www.remembertrip.tk/signin', {
         user_id: id,
         password: pwd,
       })
       .then(data => {
-        console.log(data);
-        loginHandler(id, pwd, data);
+        console.log(data.data.data);
+        context.funcs.loginHandler(id, pwd, data.data.data);
+      })
+      .then(() => {
+        alert('로그인');
+        navigate('/');
+        onReset();
       });
-
-    alert('로그인');
-    navigate('/');
-    onReset();
   };
 
   return (
     <div
+      className="SignIn"
       style={{
         display: 'flex',
         justifyContent: 'center',

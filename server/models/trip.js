@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       start_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
       },
       end_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
       },
       totalPrice: {
         type: DataTypes.INTEGER,

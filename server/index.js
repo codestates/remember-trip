@@ -8,7 +8,7 @@ const { sequelize } = require("./models");
 
 const user = require("./routes/user");
 const myPage = require("./routes/myPage");
-const trip = require("./routes/trip.js");
+const trip = require("./routes/trip");
 
 sequelize
   .sync({ force: false })
