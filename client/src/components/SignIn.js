@@ -40,11 +40,12 @@ function SignIn() {
       .then(data => {
         console.log(data);
         loginHandler(id, pwd, data);
+      })
+      .then(() => {
+        alert('로그인');
+        navigate('/');
+        onReset();
       });
-
-    alert('로그인');
-    navigate('/');
-    onReset();
   };
 
   return (
