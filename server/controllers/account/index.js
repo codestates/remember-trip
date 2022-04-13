@@ -10,7 +10,7 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
-      const { trip_id } = req.query;
+      const { trip_id } = req.params;
 
       const accounts = await account.findAll({
         where: { trip_id },
@@ -31,15 +31,9 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
-      const {
-        category,
-        item_name,
-        price,
-        paid_person,
-        currency,
-        write_date,
-        trip_id,
-      } = req.body;
+      const { trip_id } = req.params;
+      const { category, item_name, price, paid_person, currency, write_date } =
+        req.body;
       const accountInfo = await account.create({
         category,
         item_name,
@@ -68,9 +62,10 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
+      const { trip_id, account_id } = req.params;
       try {
         await account.destroy({
-          where: { id: req.body.account_id },
+          where: { id: account_id },
         });
         return res.status(200).send({ message: "Account Deleted" });
       } catch (err) {

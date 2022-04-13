@@ -10,7 +10,7 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
-      const { trip_id } = req.query;
+      const { trip_id } = req.params;
 
       const diaries = await diary.findAll({
         where: { trip_id },
@@ -30,8 +30,8 @@ module.exports = {
         //토큰이 없거나 검증된 토큰이 아닌경우
         return res.status(401).send("Invalid Token");
       }
-
-      const { location, content, write_date, trip_id } = req.body;
+      const { trip_id } = req.params;
+      const { location, content, write_date } = req.body;
       const diaryInfo = await diary.create({
         location,
         content,
@@ -57,9 +57,11 @@ module.exports = {
         return res.status(401).send("Invalid Token");
       }
 
+      const { diary_id, trip_id } = req.params;
+
       try {
         await diary.destroy({
-          where: { id: req.body.diary_id },
+          where: { id: diary_id },
         });
         return res.status(200).send({ message: "diary Deleted" });
       } catch (err) {

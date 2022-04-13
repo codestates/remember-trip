@@ -8,8 +8,7 @@ const { sequelize } = require("./models");
 
 const user = require("./routes/user");
 const myPage = require("./routes/myPage");
-const account = require("./routes/account");
-const diary = require("./routes/diary");
+const trip = require("./routes/trip.js");
 
 sequelize
   .sync({ force: false })
@@ -31,8 +30,7 @@ app.use(cookieParser());
 
 app.use("/", user);
 app.use("/mypage", myPage);
-app.use("/account", account);
-app.use("/diary", diary);
+app.use("/trip", trip);
 
 server = app.listen(port, () => {
   console.log(`Listening on ${port}`);
