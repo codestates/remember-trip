@@ -40,18 +40,19 @@ function Home() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="Home">
+      <div className="HomeH1">
         <h1>Remember Trip</h1>
       </div>
-      <div>
-        <Link to="/sign-up">
-          <span>함께하기</span>
-        </Link>
+      <div className="SignLinkBox">
+        <div className="SigninLinkBox">
+          <Link to="/sign-up">
+            <span>함께하기</span>
+          </Link>
+        </div>
         {context.state.isLogIn ? (
           <>
             {context.funcs.getTrip()}
-            {console.log(context.state.tripList)}
             <span onClick={openModal}>시작하기</span>
             <Modal
               isOpen={modalIsOpen}
@@ -97,9 +98,11 @@ function Home() {
             </Modal>
           </>
         ) : (
-          <Link to="/sign-in">
-            <span>시작하기</span>
-          </Link>
+          <div className="SigninLinkBox">
+            <Link to="/sign-in">
+              <span>시작하기</span>
+            </Link>
+          </div>
         )}
       </div>
     </div>

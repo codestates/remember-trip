@@ -1,29 +1,44 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from 'react';
+import { stateContext } from '../store';
+const moment = require('moment');
 
 function AccountEditor({ onCreate }) {
   const item_nameInput = useRef();
   const priceInput = useRef();
   const paid_personInput = useRef();
   const currencyInput = useRef();
+  const context = useContext(stateContext);
+
+  const startDate = context.state.tripList[0].start_date.split('/');
+  startDate[0] = Number(startDate[0]);
+  startDate[1] = Number(startDate[1]);
+  startDate[2] = Number(startDate[2]);
+  const newDate = new Date();
+  let nowTime = [
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    newDate.getDate(),
+  ];
+  const dateDiff = moment(nowTime).diff(moment(startDate), 'days');
 
   const [state, setState] = useState({
-    write_date: "",
-    item_name: "",
-    price: "",
-    paid_person: "",
-    currency: "",
-    category: "식비",
+    write_date: '',
+    item_name: '',
+    price: '',
+    paid_person: '',
+    currency: '',
+    category: '식비',
   });
 
-  const handleChangeState = (e) => {
-    console.log("target name: ", e.target.name);
-    console.log("target value: ", e.target.value);
+  const handleChangeState = e => {
+    console.log('target name: ', e.target.name);
+    console.log('target value: ', e.target.value);
     setState({ ...state, [e.target.name]: e.target.value });
     // name : value
     //ex) input에 입력시 author(input name): e.target.value(onchange동작)
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     if (state.item_name.length < 1) {
       item_nameInput.current.focus();
       return;
@@ -51,17 +66,17 @@ function AccountEditor({ onCreate }) {
       state.price,
       state.paid_person,
       // state.new Date
-      (state.write_date = new Date().toLocaleString())
+      (state.write_date = new Date().toLocaleString()),
     );
-    console.log("일기작성여부확인 :", state);
-    alert("저장성공!");
+    console.log('일기작성여부확인 :', state);
+    alert('저장성공!');
     setState({
-      write_date: "",
-      item_name: "",
-      currency: "",
-      paid_person: "",
-      price: "",
-      category: "교통비",
+      write_date: '',
+      item_name: '',
+      currency: '',
+      paid_person: '',
+      price: '',
+      category: '교통비',
     });
   };
 
@@ -70,7 +85,7 @@ function AccountEditor({ onCreate }) {
       <h2>가계부를 기록해요</h2>
       <div>
         <div className="InputFirstArea">
-          <span>"변수지정필요" 일차 !</span>
+          <span>{dateDiff} 일차 !</span>
           <br />
           <span>
             <input
@@ -124,12 +139,17 @@ function AccountEditor({ onCreate }) {
       </div>
       <div className="InputFifthArea">
         <label>소비 항목을 선택해요 : </label>
-        <select select name="category" value={state.category} onChange={handleChangeState}>
-          <option value={"식비"}>식비</option>
-          <option value={"교통비"}>교통비</option>
-          <option value={"숙박비"}>숙박비</option>
-          <option value={"티켓"}>티켓</option>
-          <option value={"기타항목"}>기타항목</option>
+        <select
+          select
+          name="category"
+          value={state.category}
+          onChange={handleChangeState}
+        >
+          <option value={'식비'}>식비</option>
+          <option value={'교통비'}>교통비</option>
+          <option value={'숙박비'}>숙박비</option>
+          <option value={'티켓'}>티켓</option>
+          <option value={'기타항목'}>기타항목</option>
         </select>
       </div>
       <div className="InputLsatArea">

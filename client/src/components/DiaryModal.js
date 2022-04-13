@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import DiaryEditor from "./DiaryEditor";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import DiaryEditor from './DiaryEditor';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -33,9 +33,9 @@ export const ModalBtn = styled.button`
   cursor: grab;
 `;
 
-export const ModalView = styled.div.attrs((props) => ({
+export const ModalView = styled.div.attrs(props => ({
   // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있습니다.
-  role: "dialog",
+  role: 'dialog',
 }))`
   border-radius: 10px;
   background-color: #ffffff;
@@ -62,10 +62,12 @@ function DiaryModal({ onCreate }) {
   };
   return (
     <ModalContainer>
-      <ModalBtn onClick={openModalHandler}>{isOpen === false ? "✏️" : "Opened!"}</ModalBtn>
+      <ModalBtn onClick={openModalHandler}>
+        {isOpen === false ? '✏️' : 'Opened!'}
+      </ModalBtn>
       {isOpen === true ? (
         <ModalBackdrop onClick={openModalHandler}>
-          <ModalView onClick={(e) => e.stopPropagation()}>
+          <ModalView onClick={e => e.stopPropagation()}>
             <span onClick={openModalHandler} className="close-btn">
               &times;
             </span>

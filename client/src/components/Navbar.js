@@ -1,25 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const NavTag = styled.nav``;
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <NavTag>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/diary">Diary</Link>
-      </li>
-      <li>
-        <Link to="/mypage">Mypage</Link>
-      </li>
-      <li>
-        <Link to="/account">Account</Link>
-      </li>
-    </NavTag>
+    <div className="Navbar">
+      <div className="Navbar_1">
+        <Link style={{ textDecoration: 'none' }} to="/">
+          Home
+        </Link>
+      </div>
+      <div className="Navbar_2">
+        <Link style={{ textDecoration: 'none' }} to="/diary">
+          Diary
+        </Link>
+      </div>
+      <div className="Navbar_3">
+        <Link style={{ textDecoration: 'none' }} to="/mypage">
+          Mypage
+        </Link>
+      </div>
+      <div className="Navbar_4">
+        <Link style={{ textDecoration: 'none' }} to="/account">
+          Account
+        </Link>
+      </div>
+    </div>
   );
 }
 

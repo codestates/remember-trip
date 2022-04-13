@@ -3,20 +3,58 @@
   padding: 20px;
 }
 
-.AccountEditor .write_dateInput {
-  border: 2px solid red;
+.Account .AccountHeadTotalMoney {
+  margin-top: 120px;
 }
-.AccountEditor .item_nameInput {
-  border: 2px solid yellow;
+
+.Account .AccountHeadTotalMoney h2 {
+  text-align: center;
+  font-size: 40px;
 }
-.AccountEditor .currencyInput {
-  border: 2px solid blue;
+
+.Account .AccountHeadpaidMoney h3 {
+  text-align: center;
+  font-size: 20px;
 }
-.AccountEditor .priceInput {
-  border: 2px solid orange;
+
+.Account input {
+  background-color: #ececec;
+  border-bottom: 2px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: all 0.2s;
+  outline: none;
+  animation-name: inputAnimation;
 }
-.AccountEditor .paid_personInput {
-  border: 2px solid purple;
+.Account input:hover {
+  transform: scale(1.03);
+  border-color: #6fa8ed;
+}
+
+.InputFifthArea {
+  margin-top: 30px;
+}
+
+.InputFifthAreaLabel {
+  font-size: 18px;
+}
+
+select {
+  outline: none;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-family: "Gowun Batang", serif;
+  border: none;
+}
+select:hover {
+  transform: scale(1.03);
+  border-color: #6fa8ed;
 }
 
 .AccountEditor select {
@@ -28,18 +66,43 @@
 .AccountEditor button {
   width: 100px;
   padding: 10px;
+  outline: none;
   cursor: pointer;
 }
 
-/* List */
-.AccountList {
-  border: 1px solid gray;
-  padding: 20px;
-  margin-top: 20px;
+.InputLastAreaBtn {
+  border: none;
+  background-color: #ececec;
+  font-size: 40px;
 }
 
-.AccountList h2 {
-  text-align: center;
+.InputLastAreaBtn:hover {
+  transform: scale(1.4);
+}
+
+.AccountEditor .AccountEditorReturnDiv {
+  margin-top: 100px;
+}
+
+.AccountEditor span {
+  margin-bottom: 12px;
+}
+
+.Account .item_nameSpan {
+  margin-bottom: 12px;
+}
+
+/* List */
+.AccountEditorReturnDiv div {
+  margin-bottom: 7px;
+}
+.AccountEditorReturnDiv span {
+  font-size: 25px;
+}
+
+.AccountEditorH2 {
+  margin-bottom: -40px;
+  font-size: 2.2rem;
 }
 
 /*itme*/

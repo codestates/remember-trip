@@ -80,12 +80,12 @@ function MyPage() {
               end_date={el.end_date}
             />
           ))
-        : 'Not LogIn'}
+        : '로그인 하세요'}
       <button type="submit" onClick={context.funcs.logoutHandler}>
-        Logout
+        로그아웃
       </button>
       <button type="button" onClick={openModal}>
-        SignOut
+        회원탈퇴
       </button>
       <Modal
         isOpen={modalIsOpen}

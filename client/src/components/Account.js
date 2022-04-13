@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import './Account.css';
 import { stateContext } from '../store';
-import AccountEditor from './AccountEditor';
+import AccountModal from './AccountModal';
 import AccountList from './AccountList';
 
 const reducer = (state, action) => {
@@ -182,19 +182,20 @@ function Account() {
   // }, [data.length]);
 
   // const { goodCount, badCount, goodRatio } = getAccountAnalysis;
-
   return (
     <div className="Account">
       <div className="AccountHead">
         <div className="AccountHeadSpan">
           <div className="AccountHeadTotalMoney">
-            달나라 여행에 총 100만원을 들고갔어요
+            {`${context.state.tripList[0].country}에 총 ${
+              context.state.tripList[0].totalPrice / 10000
+            }만원을 들고갔어요`}
           </div>
           <div className="AccountHeadpaidMoney">
             사용한 돈은 78만원이에요 / 남은 돈은 22만원이에요
           </div>
         </div>
-        <AccountEditor onCreate={onCreate} />
+        <AccountModal onCreate={onCreate} />
       </div>
       {/* <div>기분 좋은 일기 갯수 : {goodCount}</div>
       <div>기분 나쁜 일기 갯수 : {badCount}</div>
