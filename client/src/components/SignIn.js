@@ -50,6 +50,7 @@ function SignIn() {
 
   return (
     <div
+      className="SignIn"
       style={{
         display: 'flex',
         justifyContent: 'center',

@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   name: 'remember-trip',
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
@@ -17,8 +17,9 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.s?css$/,
+        test: /\.s?[ac]ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+        exclude: [/node_modules/],
       },
       { test: /\.txt$/, use: 'raw-loader' },
       {

@@ -90,6 +90,17 @@ function Store({ children }) {
     endDateHandler,
   };
 
+  const totalCostHandler = data => {
+    setTotalCost(data);
+  };
+
+  const funcs = {
+    loginHandler,
+    logoutHandler,
+    issueCountry,
+    totalCostHandler,
+  };
+
   return (
     <stateContext.Provider value={{ state, funcs }}>
       {children}

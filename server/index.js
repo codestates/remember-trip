@@ -4,6 +4,21 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const port = 8080;
+const { sequelize } = require("./models");
+
+const user = require("./routes/user");
+const myPage = require("./routes/myPage");
+const account = require("./routes/account");
+const diary = require("./routes/diary");
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("데이터베이스 연결 성공");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.use(express.json());
 app.use(
@@ -15,9 +30,10 @@ app.use(
 );
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  return res.status(200).send("Hello World");
-});
+app.use("/", user);
+app.use("/mypage", myPage);
+app.use("/account", account);
+app.use("/diary", diary);
 
 server = app.listen(port, () => {
   console.log(`Listening on ${port}`);

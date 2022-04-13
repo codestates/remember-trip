@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Diary from './components/Diary';
 import Home from './components/Home';
 import MyPage from './components/MyPage';
 import Navbar from './components/Navbar';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Store from './store';
+import './App.css';
 
 export default function App() {
   return (
