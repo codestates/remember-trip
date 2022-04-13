@@ -11,7 +11,7 @@ const myPage = require("./routes/myPage");
 const trip = require("./routes/trip");
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })

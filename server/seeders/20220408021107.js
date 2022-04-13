@@ -34,26 +34,30 @@ module.exports = {
       {
         user_id: 1,
         country: "Korea",
-        start_date: "2000-01-01 00:00:00",
-        end_date: "2001-01-01 11:59:59",
+        totalPrice: 100000,
+        start_date: "2000/01/01",
+        end_date: "2001/01/01",
       },
       {
         user_id: 2,
         country: "Korea",
-        start_date: "2000-01-01 00:00:00",
-        end_date: "2001-01-01 11:59:59",
+        totalPrice: 200000,
+        start_date: "2000/01/01",
+        end_date: "2001/01/01",
       },
       {
         user_id: 3,
         country: "Korea",
-        start_date: "2000-01-01 00:00:00",
-        end_date: "2001-01-01 11:59:59",
+        totalPrice: 300000,
+        start_date: "2000/01/01",
+        end_date: "2001/01/01",
       },
       {
         user_id: 4,
         country: "Korea",
-        start_date: "2000-01-01 00:00:00",
-        end_date: "2001-01-01 11:59:59",
+        totalPrice: 400000,
+        start_date: "2000/01/01",
+        end_date: "2001/01/01",
       },
     ]);
 
