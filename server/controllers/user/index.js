@@ -1,5 +1,6 @@
 const { user } = require("../../models");
 const jwt = require("jsonwebtoken");
+const { isAuthorized } = require("../tokenHandler");
 require("dotenv").config();
 
 module.exports = {
@@ -92,9 +93,9 @@ module.exports = {
   withdrawal: {
     // 회원탈퇴
     delete: async (req, res) => {
+      const userInfo = isAuthorized(req);
       try {
-        const { user_id, password } = req.body;
-
+        const { user_id, password } = userInfo;
         await user.destroy({
           where: { user_id, password },
         });

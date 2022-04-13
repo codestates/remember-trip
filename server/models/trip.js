@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       end_date: {
         type: DataTypes.DATE,
       },
+      totalPrice: {
+        type: DataTypes.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
