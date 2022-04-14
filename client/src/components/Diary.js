@@ -59,8 +59,6 @@ function Diary() {
       )
       .then(data => {
         const initData = data.data.diaries;
-
-        console.log(initData);
         dispatch({ type: 'INIT', data: initData });
         diarySetData(initData);
       });
@@ -134,7 +132,6 @@ function Diary() {
         },
       )
       .then(res => {
-        console.log(res);
         dispatch({ type: 'REMOVE', targetId });
 
         const newDiaryList = data.filter(it => it.id !== targetId);

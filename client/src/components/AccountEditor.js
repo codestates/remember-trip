@@ -31,8 +31,6 @@ function AccountEditor({ onCreate, openModalHandler }) {
   });
 
   const handleChangeState = e => {
-    console.log('target name: ', e.target.name);
-    console.log('target value: ', e.target.value);
     setState({ ...state, [e.target.name]: e.target.value });
     // name : value
     //ex) input에 입력시 author(input name): e.target.value(onchange동작)
@@ -68,7 +66,6 @@ function AccountEditor({ onCreate, openModalHandler }) {
       // state.new Date
       (state.write_date = new Date().toLocaleString()),
     );
-    console.log('일기작성여부확인 :', state);
     alert('저장성공!');
     setState({
       write_date: '',

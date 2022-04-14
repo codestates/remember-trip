@@ -39,7 +39,6 @@ function SignIn() {
         password: pwd,
       })
       .then(data => {
-        console.log(data.data.data);
         context.funcs.loginHandler(id, pwd, data.data.data);
       })
       .then(() => {
