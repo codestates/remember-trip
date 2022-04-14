@@ -2,16 +2,15 @@ import React, {
   useState,
   useCallback,
   useEffect,
-  useMemo,
   useReducer,
   useRef,
   useContext,
 } from 'react';
 import './Diary.css';
+import axios from 'axios';
 import { stateContext } from '../store';
 import DiaryModal from './DiaryModal';
 import DiaryList from './DiaryList';
-import axios from 'axios';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -131,7 +130,7 @@ function Diary() {
           },
         },
       )
-      .then(res => {
+      .then(() => {
         dispatch({ type: 'REMOVE', targetId });
 
         const newDiaryList = data.filter(it => it.id !== targetId);
@@ -149,32 +148,20 @@ function Diary() {
     );
   };
 
-  const memoizedDispatches = useMemo(() => {
-    return { onCreate, onRemove, onEdit };
-  }, []);
-
-  // const getDiaryAnalysis = useMemo(() => {
-  //   if (data.length === 0) {
-  //     return { goodcount: 0, badCount: 0, goodRatio: 0 };
-  //   }
-
-  //   const goodCount = data.filter((it) => it.write_date >= 3).length;
-  //   const badCount = data.length - goodCount;
-  //   const goodRatio = (goodCount / data.length) * 100.0;
-  //   const badRatio = (badCount / data.length) * 100.0;
-  //   return { goodCount, badCount, goodRatio };
-  // }, [data.length]);
-
-  // const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
-
   return (
-    <div className="Diary">
-      <DiaryModal onCreate={onCreate} />
-      {/* <div>전체 일기 : {data.length}</div>
-      <div>기분 좋은 일기 갯수 : {goodCount}</div>
-      <div>기분 나쁜 일기 갯수 : {badCount}</div>
-      <div> 🥰 {goodRatio}%</div> */}
-      <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={diaryData} />
+    <div>
+      {context.state.isLogIn ? (
+        <div className="Diary">
+          <DiaryModal onCreate={onCreate} />
+          <DiaryList
+            onEdit={onEdit}
+            onRemove={onRemove}
+            diaryList={diaryData}
+          />
+        </div>
+      ) : (
+        <p className="MyPageP">💁‍♂️ 먼저 로그인을 진행해주세요 </p>
+      )}
     </div>
   );
 }

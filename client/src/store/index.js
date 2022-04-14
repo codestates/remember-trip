@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-restricted-syntax */
 import React, { createContext, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
@@ -14,6 +16,7 @@ function Store({ children }) {
   const [start_date, setStartDate] = useState(null);
   const [end_date, setEndDate] = useState(null);
   const [tripList, setTripList] = useState([]);
+  const [remainingString, setRemainingString] = useState('');
 
   const state = {
     isLogIn,
@@ -23,6 +26,11 @@ function Store({ children }) {
     start_date,
     end_date,
     tripList,
+    remainingString,
+  };
+
+  const issueRemain = data => {
+    setRemainingString(data);
   };
 
   const issueCountry = data => {
@@ -33,7 +41,7 @@ function Store({ children }) {
     setAccessToken(token);
   };
 
-  const loginHandler = (id, password, data) => {
+  const loginHandler = data => {
     setIsLogIn(true);
     issueAccessToken(data.accessToken);
   };
@@ -59,6 +67,41 @@ function Store({ children }) {
     setTripList(date);
   };
 
+  const getTrip = () => {
+    axios
+      .get('https://www.remembertrip.tk/mypage/trip', {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(data => {
+        if (tripList.length === 0) {
+          setTripList([...tripList, ...data.data.trips]);
+          return;
+        }
+
+        const newTrips = data.data.trips;
+
+        if (tripList.length !== newTrips.length) {
+          setTripList(newTrips);
+        }
+        for (const trip of tripList) {
+          let isSame = false;
+          for (const newTrip of newTrips) {
+            if (trip.id === newTrip.id) {
+              isSame = true;
+              break;
+            }
+          }
+          if (!isSame) {
+            setTripList(newTrips);
+            break;
+          }
+        }
+      });
+  };
+
   const startTrip = () => {
     axios
       .post(
@@ -76,41 +119,6 @@ function Store({ children }) {
       });
   };
 
-  const getTrip = () => {
-    axios({
-      url: 'https://www.remembertrip.tk/mypage/trip',
-      method: 'get',
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-    }).then(data => {
-      if (tripList.length === 0) {
-        setTripList([...tripList, ...data.data.trips]);
-        return;
-      }
-
-      const newTrips = data.data.trips;
-
-      if (tripList.length !== newTrips.length) {
-        setTripList(newTrips);
-      }
-      for (const trip of tripList) {
-        let isSame = false;
-        for (const newTrip of newTrips) {
-          if (trip.id === newTrip.id) {
-            isSame = true;
-            break;
-          }
-        }
-        if (!isSame) {
-          setTripList(newTrips);
-          break;
-        }
-      }
-    });
-  };
-
   const funcs = {
     loginHandler,
     logoutHandler,
@@ -121,9 +129,11 @@ function Store({ children }) {
     endDateHandler,
     updateTripList,
     getTrip,
+    issueRemain,
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <stateContext.Provider value={{ state, funcs }}>
       {children}
     </stateContext.Provider>

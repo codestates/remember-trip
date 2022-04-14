@@ -39,12 +39,15 @@ function SignIn() {
         password: pwd,
       })
       .then(data => {
-        context.funcs.loginHandler(id, pwd, data.data.data);
+        context.funcs.loginHandler(data.data.data);
       })
       .then(() => {
         alert('로그인');
         navigate('/');
         onReset();
+      })
+      .catch(() => {
+        alert('아이디 또는 비밀번호가 틀렸습니다');
       });
   };
 
