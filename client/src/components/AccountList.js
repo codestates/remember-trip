@@ -3,7 +3,6 @@ import React from 'react';
 import AccountItem from './AccountItem';
 
 function AccountList({ AccountList, onEdit, onRemove }) {
-  const a = new Date().toLocaleString();
   return (
     <div className="AccountList">
       <div className="AccountListSpanBox">
@@ -24,7 +23,7 @@ function AccountList({ AccountList, onEdit, onRemove }) {
   );
 }
 
-AccountList.defaultProps = {
+AccountList.prototype = {
   AccountList: ['에러발생 !'],
 };
 

@@ -21,25 +21,25 @@
 
 @keyframes AccountListBox {
   49% {
-    border-top-color: #7c98bc;
-    border-right-color: #7c98bc;
+    border-top-color: rgb(243, 181, 209);
+    border-right-color: rgb(243, 181, 209);
     -webkit-transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
     transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
   }
   50% {
-    border-top-color: #7c98bc;
-    border-right-color: #7c98bc;
+    border-top-color: rgb(243, 181, 209);
+    border-right-color: rgb(243, 181, 209);
   }
   99% {
-    border-bottom-color: #7c98bc;
-    border-left-color: #7c98bc;
+    border-bottom-color: rgb(243, 181, 209);
+    border-left-color: rgb(243, 181, 209);
     -webkit-transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s,
       height 0.25s ease-out 0.75s;
     transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s,
       height 0.25s ease-out 0.75s;
   }
   100% {
-    border-color: #7c98bc;
+    border-color: rgb(243, 181, 209);
   }
 }
 
@@ -65,7 +65,7 @@
 
 /*---------------MODAL-----------------*/
 .AccountModalview {
-  border: 5px solid;
+  border: 3px solid;
   text-align: center;
   border-radius: 10px;
   background-color: #ececec;
@@ -95,6 +95,7 @@
 /* --------------ACCOUNT ---------------*/
 
 .AccountEditor {
+  min-height: 650px;
   text-align: center;
   padding: 20px;
 }
@@ -109,6 +110,7 @@
 }
 
 .Account .AccountHeadpaidMoney {
+  padding-bottom: 20px;
   text-align: center;
   font-size: 20px;
 }
@@ -130,6 +132,7 @@
 }
 .Account input:hover {
   transform: scale(1.03);
+  border-bottom: 3px solid;
   border-color: rgb(243, 181, 209);
 }
 
@@ -210,25 +213,45 @@ select:hover {
   background-color: rgb(245, 214, 228);
   margin-bottom: 10px;
   padding: 20px;
+  display: flex;
 }
 
-.AccountItem .infoFirstSecondBox {
-  text-align: center;
-  width: 35%;
-}
+/* @media (max-width: 800px) {
+  div .AccountItem {
+    display: block;
+    justify-content: center;
+    text-align: center;
+  }
+} */
+
+/* .infoFirstbox {
+  font-size: 20px;
+  width: auto;
+  background-color: red;
+  align-items: center;
+  justify-content: center;
+} */
 
 .AccountItem .AccountItmeP1 {
+  max-width: 200px;
+  width: 200px;
   padding-top: 13px;
   margin: 10px 0px;
   font-size: 18px;
 }
 .AccountItem .AccountItmeP2 {
+  width: 200px;
   margin: 8px 0px;
   font-size: 15px;
 }
 .AccountItem .AccountItmeP3 {
+  width: 200px;
   margin: 8px 0px;
   font-size: 18px;
+}
+
+.dateBox {
+  width: 200px;
 }
 
 .AccountItem .info {
@@ -239,7 +262,10 @@ select:hover {
   border-top: 1px solid gray;
 }
 
-.AccountItem .AccountItemItemNameBox {
+.AccountItemItemNameBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 12% 1% 1% 0;
   font-size: 20px;
   font-weight: bold;
@@ -250,9 +276,31 @@ select:hover {
 }
 
 .AccountItem .AccountItemContentBox {
+  display: block;
+  justify-content: center;
+  align-items: center;
   padding-top: 1%;
   font-size: 24px;
   font-weight: bold;
+}
+
+.AccountItemContentBoxText1 p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AccountItemContentBoxText2 p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoFirstSecondBox {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
 }
 
 .AccountListSpanBox {
@@ -380,4 +428,15 @@ select:hover {
   margin-bottom: 20px;
   transform-origin: top;
   animation: DiaryOnClickModal 4s linear;
+}
+
+.AccountList {
+  border: 3px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 20px;
+  animation-name: AccountListBox;
+  animation-fill-mode: forwards;
+  animation-duration: 7s;
+  animation-timing-function: initial;
 }

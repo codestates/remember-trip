@@ -7,6 +7,7 @@ import MyPageList from './MyPageList';
 import SignOut from './SignOut';
 import PatchUser from './PatchUser';
 import './MyPageList.css';
+
 const customStyles = {
   content: {
     top: '50%',
@@ -52,6 +53,7 @@ function MyPage() {
         },
       })
       .then(() => {
+        context.funcs.logoutHandler();
         navigate('/');
       });
   };

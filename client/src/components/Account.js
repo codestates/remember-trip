@@ -3,7 +3,6 @@ import React, {
   useState,
   useCallback,
   useEffect,
-  useMemo,
   useReducer,
   useRef,
   useContext,
@@ -12,6 +11,7 @@ import './Account.css';
 import { stateContext } from '../store';
 import AccountModal from './AccountModal';
 import AccountList from './AccountList';
+
 const { getName } = require('country-list');
 
 const reducer = (state, action) => {
@@ -40,6 +40,7 @@ const reducer = (state, action) => {
   }
 };
 
+let totalSpent = 0;
 function Account() {
   const [accountData, accountSetData] = useState([]);
   const [data, dispatch] = useReducer(reducer, []);
@@ -61,7 +62,9 @@ function Account() {
       )
       .then(data => {
         const initData = data.data.accounts;
-
+        for (let i = 0; i < initData.length; i++) {
+          totalSpent += initData.price;
+        }
         dispatch({ type: 'INIT', data: initData });
         accountSetData(initData);
       });
@@ -166,10 +169,6 @@ function Account() {
     );
   };
 
-  const memoizedDispatches = useMemo(() => {
-    return { onCreate, onRemove, onEdit };
-  }, []);
-
   let totalPrice = context.state.tripList[0].totalPrice;
   let totalPriceString = '';
   let totalSpentString = '';
@@ -179,7 +178,7 @@ function Account() {
   } else {
     totalPriceString = `${totalPrice / 10000}만원`;
   }
-  let totalSpent = 0;
+
   if (accountData.length > 0) {
     totalSpent = accountData
       .map(el => el.price)
@@ -199,25 +198,31 @@ function Account() {
   }
 
   return (
-    <div className="Account">
-      <div className="AccountHead">
-        <div className="AccountHeadSpan">
-          <div className="AccountHeadTotalMoney">
-            {`${getName(context.state.tripList[0].country)}에`}
-            <br />
-            {`총 ${totalPriceString}을 들고갔어요`}
+    <div>
+      {context.state.isLogIn ? (
+        <div className="Account">
+          <div className="AccountHead">
+            <div className="AccountHeadSpan">
+              <div className="AccountHeadTotalMoney">
+                {`${getName(context.state.tripList[0].country)}에`}
+                <br />
+                {`총 ${totalPriceString}을 들고갔어요`}
+              </div>
+              <div className="AccountHeadpaidMoney">
+                {`✅ 사용한돈${totalSpentString}/남은돈${remainingString}`}
+              </div>
+            </div>
+            <AccountModal onCreate={onCreate} />
           </div>
-          <div className="AccountHeadpaidMoney">
-            {`✅ 사용한돈${totalSpentString}/남은돈${remainingString}`}
-          </div>
+          <AccountList
+            onEdit={onEdit}
+            onRemove={onRemove}
+            AccountList={accountData}
+          />
         </div>
-        <AccountModal onCreate={onCreate} />
-      </div>
-      <AccountList
-        onEdit={onEdit}
-        onRemove={onRemove}
-        AccountList={accountData}
-      />
+      ) : (
+        <p className="MyPageP">💁‍♂️ 먼저 로그인을 진행해주세요 </p>
+      )}
     </div>
   );
 }

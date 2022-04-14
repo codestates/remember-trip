@@ -1,5 +1,5 @@
 .MyPageP {
-  font-size: 40px;
+  font-size: 35px;
   animation-name: MyPageshake;
   animation-fill-mode: forwards;
   /* animation-iteration-count: infinite; */
@@ -37,7 +37,7 @@
   color: rgb(56, 119, 161);
 }
 
-.item{
+.item {
   flex: 1;
   text-align: center;
 }

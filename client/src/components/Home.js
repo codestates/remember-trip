@@ -29,9 +29,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <div className="HomeH1">
-        <h1>Remember Trip</h1>
-      </div>
+      <div className="HomeH1">{/* <h1>Remember Trip</h1> */}</div>
       <div className="somediv">
         <section className="section">
           <div className="masthead-image" id="master-container">
@@ -147,18 +145,18 @@ function Home() {
                   type="number"
                   onChange={e => context.funcs.totalCostHandler(e.target.value)}
                 />
-                {/* <Link to="/mypage"> */}
               </div>
-              <div className="InModalBox4">
-                <button
-                  className="FlagSubmitButton"
-                  type="button"
-                  onClick={context.funcs.startTrip}
-                >
-                  Start
-                </button>
-              </div>
-              {/* </Link> */}
+              <Link to="/mypage">
+                <div className="InModalBox4">
+                  <button
+                    className="FlagSubmitButton"
+                    type="button"
+                    onClick={context.funcs.startTrip}
+                  >
+                    Start
+                  </button>
+                </div>
+              </Link>
             </Modal>
           </>
         ) : (
