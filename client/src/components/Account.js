@@ -62,8 +62,9 @@ function Account() {
       )
       .then(data => {
         const initData = data.data.accounts;
+        totalSpent = 0;
         for (let i = 0; i < initData.length; i++) {
-          totalSpent += initData.price;
+          totalSpent += initData[i].price;
         }
         dispatch({ type: 'INIT', data: initData });
         accountSetData(initData);
@@ -170,32 +171,32 @@ function Account() {
   };
 
   let totalPrice = context.state.tripList[0].totalPrice;
-  let totalPriceString = '';
-  let totalSpentString = '';
-  let remainingString = '';
-  if (totalPrice < 10000) {
-    totalPriceString = `${totalPrice}원`;
-  } else {
-    totalPriceString = `${totalPrice / 10000}만원`;
-  }
+  // let totalPriceString = '';
+  // let totalSpentString = '';
+  // let remainingString = '';
+  // if (totalPrice < 10000) {
+  //   totalPriceString = `${totalPrice}원`;
+  // } else {
+  //   totalPriceString = `${totalPrice / 10000}만원`;
+  // }
 
-  if (accountData.length > 0) {
-    totalSpent = accountData
-      .map(el => el.price)
-      .reduce((prev, next) => prev + next, 0);
-  }
+  // if (accountData.length > 0) {
+  //   totalSpent = accountData
+  //     .map(el => el.price)
+  //     .reduce((prev, next) => prev + next, 0);
+  // }
 
-  if (totalSpent < 10000) {
-    totalSpentString = `${totalSpent}원`;
-  } else {
-    totalSpentString = `${totalSpent / 10000}만원`;
-  }
+  // if (totalSpent < 10000) {
+  //   totalSpentString = `${totalSpent}원`;
+  // } else {
+  //   totalSpentString = `${totalSpent / 10000}만원`;
+  // }
 
-  if (totalPrice - totalSpent < 10000) {
-    remainingString = `${totalPrice - totalSpent}원`;
-  } else {
-    remainingString = `${(totalPrice - totalSpent) / 10000}만원`;
-  }
+  // if (totalPrice - totalSpent < 10000) {
+  //   remainingString = `${totalPrice - totalSpent}원`;
+  // } else {
+  //   remainingString = `${(totalPrice - totalSpent) / 10000}만원`;
+  // }
 
   return (
     <div>
@@ -206,10 +207,10 @@ function Account() {
               <div className="AccountHeadTotalMoney">
                 {`${getName(context.state.tripList[0].country)}에`}
                 <br />
-                {`총 ${totalPriceString}을 들고갔어요`}
+                {`총 ${totalPrice}을 들고갔어요`}
               </div>
               <div className="AccountHeadpaidMoney">
-                {`✅ 사용한돈${totalSpentString}/남은돈${remainingString}`}
+                {`✅ 사용한돈${totalSpent}/남은돈${totalPrice - totalSpent}`}
               </div>
             </div>
             <AccountModal onCreate={onCreate} />
