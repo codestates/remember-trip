@@ -6,7 +6,7 @@ import { stateContext } from '../store';
 import MyPageList from './MyPageList';
 import SignOut from './SignOut';
 import PatchUser from './PatchUser';
-
+import './MyPageList.css';
 const customStyles = {
   content: {
     top: '50%',
@@ -69,48 +69,63 @@ function MyPage() {
   //   });
 
   return (
-    <div>
-      {context.state.isLogIn
-        ? context.state.tripList.map(el => (
-            <MyPageList
-              key={el.id}
-              country={el.country}
-              totalCost={el.totalPrice}
-              start_date={el.start_date}
-              end_date={el.end_date}
-            />
-          ))
-        : '로그인 하세요'}
-      <button type="submit" onClick={context.funcs.logoutHandler}>
-        로그아웃
-      </button>
-      <button type="button" onClick={openModal}>
-        회원탈퇴
-      </button>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        appElement={document.getElementById('root') || undefined}
-      >
-        <SignOut
-          closeModal={closeModal}
-          signoutHandler={signoutHandler}
-        ></SignOut>
-      </Modal>
-      <button type="button" onClick={newOpenModal}>
-        정보수정
-      </button>
-      <Modal
-        isOpen={newModalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        appElement={document.getElementById('root') || undefined}
-      >
-        <PatchUser></PatchUser>
-      </Modal>
+    <div className="MyPage">
+      {context.state.isLogIn ? (
+        context.state.tripList.map(el => (
+          <MyPageList
+            className="MyPageListComponent"
+            key={el.id}
+            country={el.country}
+            totalCost={el.totalPrice}
+            start_date={el.start_date}
+            end_date={el.end_date}
+          />
+        ))
+      ) : (
+        <p className="MyPageP">💁‍♂️ 먼저 로그인을 진행해주세요 </p>
+      )}
+      <div className="MyPageBtnBoxes">
+        <div className="MyPageBtn1">
+          <button
+            className="MyPageBtn1"
+            type="submit"
+            onClick={context.funcs.logoutHandler}
+          >
+            로그아웃
+          </button>
+        </div>
+        <div className="MyPageBtn2">
+          <button className="MyPageBtn2" type="button" onClick={openModal}>
+            회원탈퇴
+          </button>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            appElement={document.getElementById('root') || undefined}
+          >
+            <SignOut
+              closeModal={closeModal}
+              signoutHandler={signoutHandler}
+            ></SignOut>
+          </Modal>
+        </div>
+        <div className="MyPageBtn3">
+          <button className="MyPageBtn3" type="button" onClick={newOpenModal}>
+            정보수정
+          </button>
+          <Modal
+            isOpen={newModalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            appElement={document.getElementById('root') || undefined}
+          >
+            <PatchUser></PatchUser>
+          </Modal>
+        </div>
+      </div>
     </div>
   );
 }

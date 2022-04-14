@@ -37,6 +37,10 @@ export const ModalBtn = styled.button`
   cursor: grab;
   animation-name: ${DiaryModalBtnAnimation};
   animation-duration: 1.5s;
+  :hover {
+    transition: all 0.2s linear;
+    transform: scale(1.2);
+  }
 `;
 
 function DiaryModal({ onCreate, openModalHandler }) {

@@ -6,17 +6,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { stateContext } from '../store';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState('');
@@ -114,47 +103,62 @@ function Home() {
           <>
             {context.funcs.getTrip()}
             <span onClick={openModal}>시작하기</span>
-
             <Modal
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
               onRequestClose={closeModal}
-              style={customStyles}
+              className="FlagModal"
               appElement={document.getElementById('root') || undefined}
             >
-              <ReactFlagsSelect
-                selected={selected}
-                onSelect={data => {
-                  context.funcs.issueCountry(data);
-                  setSelected(data);
-                }}
-                fullWidth={false}
-              />
-              <DatePicker
-                selected={startDate}
-                onChange={date => {
-                  setStartDate(date);
-                  context.funcs.startDateHandler(date);
-                }}
-              />
-              ~
-              <DatePicker
-                selected={endDate}
-                onChange={date => {
-                  setEndDate(date);
-                  context.funcs.endDateHandler(date);
-                }}
-              />
-              <label htmlFor="total-cost">Total</label>
-              <input
-                id="total-coast"
-                type="number"
-                onChange={e => context.funcs.totalCostHandler(e.target.value)}
-              />
-              {/* <Link to="/mypage"> */}
-              <button type="button" onClick={context.funcs.startTrip}>
-                Start
-              </button>
+              <div className="InModalBox1">
+                <ReactFlagsSelect
+                  className="ReactFlagsSelect"
+                  selected={selected}
+                  onSelect={data => {
+                    context.funcs.issueCountry(data);
+                    setSelected(data);
+                  }}
+                  fullWidth={false}
+                />
+              </div>
+              <div className="InModalBox2">
+                <DatePicker
+                  selected={startDate}
+                  onChange={date => {
+                    setStartDate(date);
+                    context.funcs.startDateHandler(date);
+                  }}
+                />
+                ~
+                <DatePicker
+                  selected={endDate}
+                  onChange={date => {
+                    setEndDate(date);
+                    context.funcs.endDateHandler(date);
+                  }}
+                />
+              </div>
+              <div className="InModalBox3">
+                <label className="total-cost" htmlFor="total-cost">
+                  Total
+                </label>
+                <input
+                  className="total-costInPut"
+                  id="total-coast"
+                  type="number"
+                  onChange={e => context.funcs.totalCostHandler(e.target.value)}
+                />
+                {/* <Link to="/mypage"> */}
+              </div>
+              <div className="InModalBox4">
+                <button
+                  className="FlagSubmitButton"
+                  type="button"
+                  onClick={context.funcs.startTrip}
+                >
+                  Start
+                </button>
+              </div>
               {/* </Link> */}
             </Modal>
           </>

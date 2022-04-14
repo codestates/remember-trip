@@ -36,6 +36,10 @@ export const ModalBtn = styled.button`
   cursor: grab;
   animation-name: ${AccountModalBtnAnimation};
   animation-duration: 1.5s;
+  :hover {
+    transition: all 0.2s linear;
+    transform: scale(1.2);
+  }
 `;
 
 function AccountModal({ onCreate }) {

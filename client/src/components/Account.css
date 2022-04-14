@@ -43,7 +43,7 @@
   }
 }
 
-@keyframes shake {
+@keyframes DiaryOnClickModal {
   0%,
   80% {
     transform: rotate(0deg);
@@ -76,7 +76,7 @@
   height: 80%;
 
   animation-name: AccountModalBtnAnimation;
-  animation-duration: 1s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
 }
 
@@ -130,7 +130,7 @@
 }
 .Account input:hover {
   transform: scale(1.03);
-  border-color: #6fa8ed;
+  border-color: rgb(243, 181, 209);
 }
 
 .InputFifthArea {
@@ -150,7 +150,7 @@ select {
 }
 select:hover {
   transform: scale(1.03);
-  border-color: #6fa8ed;
+  border-color: rgb(243, 181, 209);
 }
 
 /* ---------------------- ACCOUNT EDIT -------------------------*/
@@ -175,7 +175,8 @@ select:hover {
 }
 
 .InputLastAreaBtn:hover {
-  transform: scale(1.4);
+  transition: all ease 1s;
+  transform: rotate(-45deg);
 }
 
 .AccountEditor .AccountEditorReturnDiv {
@@ -213,12 +214,12 @@ select:hover {
 
 .AccountItem .infoFirstSecondBox {
   text-align: center;
-  width: 50%;
+  width: 35%;
 }
 
 .AccountItem .AccountItmeP1 {
-  padding-top: 5px;
-  margin: 8px 0px;
+  padding-top: 13px;
+  margin: 10px 0px;
   font-size: 18px;
 }
 .AccountItem .AccountItmeP2 {
@@ -239,8 +240,13 @@ select:hover {
 }
 
 .AccountItem .AccountItemItemNameBox {
-  margin: 12% 0 0 0;
-  font-size: 18px;
+  margin: 12% 1% 1% 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.AccountItem .AccountItemItemNameBox:hover {
+  animation: DiaryOnClickModal 4s infinite;
 }
 
 .AccountItem .AccountItemContentBox {
@@ -254,12 +260,13 @@ select:hover {
   text-align: center;
   margin-bottom: 20px;
   transform-origin: top;
-  animation: shake 4s linear;
+  animation: DiaryOnClickModal 4s linear;
 }
 .AccountItem .AccountItemBtnBox {
+  margin-top: -10px;
   padding-top: 5%;
   text-align: center;
-  width: 25%;
+  width: 15%;
   justify-content: end;
   background-color: rgb(245, 214, 228);
   margin-bottom: 10px;
@@ -348,9 +355,14 @@ select:hover {
 }
 
 .AccountItem .AccountItemInput {
+  font-size: 30px;
   background-color: rgb(245, 214, 228);
+  border-bottom: 1px solid;
+  border-color: rgb(171, 169, 169);
+  margin: 0% 15% 10% 0;
   padding-top: 2vw;
-  width: 17vw;
+  width: 15vw;
+  height: 5vw;
 }
 
 .AccountItem .AccountItemInput input {
@@ -367,5 +379,5 @@ select:hover {
   text-align: center;
   margin-bottom: 20px;
   transform-origin: top;
-  animation: shake 4s linear;
+  animation: DiaryOnClickModal 4s linear;
 }

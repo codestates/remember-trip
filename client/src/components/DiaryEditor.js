@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-function DiaryEditor({ onCreate }) {
+function DiaryEditor({ onCreate, openModalHandler }) {
   const locationInput = useRef();
   const contentInput = useRef();
   const [state, setState] = useState({
