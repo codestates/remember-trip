@@ -12,6 +12,12 @@ function SignIn() {
 
   const navigate = useNavigate();
 
+  const onKeyUp = event => {
+    if (event.key === 'Enter') {
+      onLogin();
+    }
+  };
+
   const onIdHandler = event => {
     setId(event.currentTarget.value);
   };
@@ -26,7 +32,7 @@ function SignIn() {
   }, [setId, setPwd]);
 
   const onLogin = event => {
-    event.preventDefault();
+    // event.preventDefault();
 
     if (!id || !pwd) {
       alert('모든 값을 정확하게 입력해주세요');
@@ -58,7 +64,7 @@ function SignIn() {
           <h1>Remember Trip</h1>
         </div>
         <div className="SignInInput">
-          <form>
+          <form onKeyUp={event => onKeyUp(event)}>
             <label htmlFor="user_id">user_id</label>
             <input
               id="user_id"
