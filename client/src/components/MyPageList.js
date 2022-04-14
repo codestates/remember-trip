@@ -1,4 +1,5 @@
 import React from 'react';
+import './MyPageList.css';
 
 const moment = require('moment');
 
@@ -15,7 +16,7 @@ function MyPageList(props) {
   endDate[2] = Number(endDate[2]);
 
   return (
-    <div>
+    <div className="MyPageListBox">
       {props.country}Trip, total{props.totalCost},
       {moment(endDate).diff(moment(startDate), 'days')}days
     </div>

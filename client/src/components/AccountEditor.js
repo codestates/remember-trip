@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from 'react';
 import { stateContext } from '../store';
 const moment = require('moment');
 
-function AccountEditor({ onCreate }) {
+function AccountEditor({ onCreate, openModalHandler }) {
   const item_nameInput = useRef();
   const priceInput = useRef();
   const paid_personInput = useRef();
@@ -78,6 +78,7 @@ function AccountEditor({ onCreate }) {
       price: '',
       category: '교통비',
     });
+    openModalHandler(false);
   };
 
   return (

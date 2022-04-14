@@ -51,35 +51,48 @@ function SignIn() {
 
   return (
     <div className="SignIn">
-      <h1>Remember Trip</h1>
-      <form>
-        <label htmlFor="user_id">아이디:</label>
-        <input
-          id="user_id"
-          value={id}
-          onChange={onIdHandler}
-          placeholder="아이디를 입력해주세요"
-          required
-        />
-        <hr />
-        <label htmlFor="user_pwd">비밀번호:</label>
-        <input
-          id="user_pwd"
-          value={pwd}
-          onChange={onPasswordHandler}
-          placeholder="비밀번호를 입력해주세요"
-          required
-        />
-        <hr />
-      </form>
-      <button type="submit" value="로그인" onClick={onLogin}>
-        SignIn
-      </button>
-      <Link to="/sign-up">
-        <button type="submit" value="회원가입">
-          SignUp
-        </button>
-      </Link>
+      <div className="SignInDiv1">
+        <div>
+          <h1>Remember Trip</h1>
+        </div>
+        <div className="SignInInput">
+          <form>
+            <label htmlFor="user_id">user_id</label>
+            <input
+              id="user_id"
+              value={id}
+              onChange={onIdHandler}
+              placeholder="아이디를 입력해요"
+              required
+            />
+            <hr />
+            <label htmlFor="user_pwd">PASSWORD</label>
+            <input
+              type="password"
+              id="user_pwd"
+              value={pwd}
+              onChange={onPasswordHandler}
+              placeholder="비밀번호를 입력해요"
+              required
+            />
+            <hr />
+          </form>
+        </div>
+      </div>
+      <div className="SignInBts">
+        <div>
+          <button type="submit" value="로그인" onClick={onLogin}>
+            시작해요
+          </button>
+        </div>
+        <Link to="/sign-up">
+          <div>
+            <button type="submit" value="회원가입">
+              함께해요
+            </button>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
