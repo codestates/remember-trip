@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useCallback, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { stateContext } from '../store';
+import './Sign.css';
 
 function SignIn() {
   const [id, setId] = useState('');
@@ -49,16 +50,7 @@ function SignIn() {
   };
 
   return (
-    <div
-      className="SignIn"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100vh',
-      }}
-    >
+    <div className="SignIn">
       <h1>Remember Trip</h1>
       <form>
         <label htmlFor="user_id">아이디:</label>

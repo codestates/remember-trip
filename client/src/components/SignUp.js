@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import './Sign.css';
 
 function SignUp() {
   const [id, setId] = useState('');
@@ -134,51 +135,66 @@ function SignUp() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100vh',
-      }}
-    >
+    <div className="SignUp">
       <form style={{ display: 'flex', flexDirection: 'column' }}>
-        <h1>회원가입</h1>
-        <label htmlFor="inputId">아이디</label>
-        <input
-          id="inputId"
-          type="text"
-          placeholder="아이디를 입력하세요"
-          value={id}
-          onChange={onIdHandler}
-          required
-        />
+        <div className="SignUpDivBox">
+          <h1>회원가입</h1>
+          <div>
+            <label className="SignUpInput" htmlFor="inputId">
+              ID
+            </label>
+          </div>
+          <input
+            id="inputId"
+            type="text"
+            placeholder="아이디를 입력하세요"
+            value={id}
+            onChange={onIdHandler}
+            required
+          />
+        </div>
         {idError ? errorMessage.idError : ''}
-        <label htmlFor="imputPwd">비밀번호</label>
-        <input
-          id="inputPwd"
-          type="password"
-          placeholder="비밀번호를 입력하세요"
-          value={pwd}
-          onChange={onPasswordHandler}
-          required
-        />
+        <div className="SignUpDivBox">
+          <div>
+            <label htmlFor="imputPwd">PASSWORD</label>
+          </div>
+          <div>
+            <input
+              id="inputPwd"
+              type="password"
+              placeholder="비밀번호를 입력하세요"
+              value={pwd}
+              onChange={onPasswordHandler}
+              required
+            />
+          </div>
+        </div>
         {pwdError ? errorMessage.pwdError : ''}
-        <label htmlFor="inputCpwd">비밀번호 확인</label>
-        <input
-          id="inputCpwd"
-          type="password"
-          placeholder="비밀번호 확인을 입력하세요"
-          value={confirmPwd}
-          onChange={onConfirmPasswordHandler}
-          required
-        />
+        <div className="SignUpDivBox">
+          <div>
+            <label htmlFor="inputCpwd">CHECK PASSWORD</label>
+          </div>
+          <div>
+            <input
+              id="inputCpwd"
+              type="password"
+              placeholder="비밀번호 확인을 입력하세요"
+              value={confirmPwd}
+              onChange={onConfirmPasswordHandler}
+              required
+            />
+          </div>
+        </div>
         {confirmPwdError ? errorMessage.confirmPwdError : ''}
-        <button type="submit" value="가입" onClick={onSignUp}>
+        <button
+          className="SingUpSubmitBtn"
+          type="submit"
+          value="가입"
+          onClick={onSignUp}
+        >
           SignUp
         </button>
-        <Link to="/sign-in">
+        <Link style={{ textDecoration: 'none' }} to="/sign-in">
           <span>already have?</span>
         </Link>
       </form>

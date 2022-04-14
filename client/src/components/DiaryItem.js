@@ -1,16 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 
-function DiaryItem({ onEdit, onRemove, location, content, write_date, id, create_date }) {
+function DiaryItem({
+  onEdit,
+  onRemove,
+  location,
+  content,
+  write_date,
+  id,
+  create_date,
+}) {
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => {
     setIsEdit(!isEdit);
-    console.log("isEdit의 state는? ->", isEdit);
+    console.log('isEdit의 state는? ->', isEdit);
   };
   const [localContent, setLocalContent] = useState(content);
   const localContentInput = useRef();
 
   const handleRemove = () => {
-    if (window.confirm(`${id + 1}번째 일기를 정말 삭제하시겠습니까?`)) {
+    if (window.confirm(`${id + 1}번째 일기를 정말로 지우겠어요?`)) {
       onRemove(id);
     }
   };
@@ -25,7 +33,7 @@ function DiaryItem({ onEdit, onRemove, location, content, write_date, id, create
       localContentInput.current.focus();
       return;
     }
-    if (window.confirm(`${id}번째 일기를 수정할거여 ?`)) {
+    if (window.confirm(`${id}번째 일기를 이렇게 수정할까요 ?`)) {
       onEdit(id, localContent);
       toggleIsEdit();
     }
@@ -34,31 +42,54 @@ function DiaryItem({ onEdit, onRemove, location, content, write_date, id, create
   return (
     <div className="DiaryItem">
       <div className="info">
-        <span>
-          장소 : {location} | 날짜 : {write_date}
-        </span>
+        <div className="place">
+          <span>장소 : {location}</span>
+        </div>
         <br />
-        <span className="date">{new Date(create_date).toLocaleString()}</span>
+
+        <span className="date">작성 시간 :{write_date}</span>
       </div>
       <div className="content">
         {isEdit ? (
-          <>
-            <textarea ref={localContentInput} value={localContent} onChange={(e) => setLocalContent(e.target.value)} />
-          </>
+          <div className="DiaryItemTextarea">
+            <textarea
+              ref={localContentInput}
+              value={localContent}
+              onChange={e => setLocalContent(e.target.value)}
+            />
+          </div>
         ) : (
-          <>{content}</>
+          <div DiaryItemContentBox>
+            <span>{content}</span>
+          </div>
         )}
       </div>
       {isEdit ? (
-        <>
-          <button onClick={handleQuitEdit}>수정 취소</button>
-          <button onClick={handleEdit}>수정 완료</button>
-        </>
+        <div className="DiaryItemOptionBtnBox">
+          <div>
+            <button className="DiaryItemQuitEditBtn" onClick={handleQuitEdit}>
+              수정 취소
+            </button>
+          </div>
+          <div>
+            <button className="DiaryItemEditSubmitBtn" onClick={handleEdit}>
+              수정 완료
+            </button>
+          </div>
+        </div>
       ) : (
-        <>
-          <button onClick={handleRemove}>삭제</button>
-          <button onClick={toggleIsEdit}>수정</button>
-        </>
+        <div className="DiaryItemBtnBox">
+          <div>
+            <button className="DiaryItemRemoteBtn" onClick={handleRemove}>
+              삭제
+            </button>
+          </div>
+          <div>
+            <button className="DiaryItemEditBtn" onClick={toggleIsEdit}>
+              수정
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

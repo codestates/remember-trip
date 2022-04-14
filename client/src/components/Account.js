@@ -169,37 +169,23 @@ function Account() {
     return { onCreate, onRemove, onEdit };
   }, []);
 
-  // const getAccountAnalysis = useMemo(() => {
-  //   if (data.length === 0) {
-  //     return { goodcount: 0, badCount: 0, goodRatio: 0 };
-  //   }
-
-  //   const goodCount = data.filter(it => it.emotion >= 3).length;
-  //   const badCount = data.length - goodCount;
-  //   const goodRatio = (goodCount / data.length) * 100.0;
-  //   const badRatio = (badCount / data.length) * 100.0;
-  //   return { goodCount, badCount, goodRatio };
-  // }, [data.length]);
-
-  // const { goodCount, badCount, goodRatio } = getAccountAnalysis;
   return (
     <div className="Account">
       <div className="AccountHead">
         <div className="AccountHeadSpan">
           <div className="AccountHeadTotalMoney">
-            {`${context.state.tripList[0].country}에 총 ${
+            {`${context.state.tripList[0].country}에`}
+            <br />
+            {`총 ${
               context.state.tripList[0].totalPrice / 10000
             }만원을 들고갔어요`}
           </div>
           <div className="AccountHeadpaidMoney">
-            사용한 돈은 78만원이에요 / 남은 돈은 22만원이에요
+            ✅ 사용한돈/남은돈 만들어서 글로 보여주실거면 여기에 넣어주세요 !
           </div>
         </div>
         <AccountModal onCreate={onCreate} />
       </div>
-      {/* <div>기분 좋은 일기 갯수 : {goodCount}</div>
-      <div>기분 나쁜 일기 갯수 : {badCount}</div>
-      <div> 🥰 {goodRatio}%</div> */}
       <AccountList
         onEdit={onEdit}
         onRemove={onRemove}

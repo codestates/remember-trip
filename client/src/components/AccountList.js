@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import AccountItem from "./AccountItem";
+import AccountItem from './AccountItem';
 
 function AccountList({ AccountList, onEdit, onRemove }) {
   const a = new Date().toLocaleString();
@@ -8,9 +8,11 @@ function AccountList({ AccountList, onEdit, onRemove }) {
   console.log(a);
   return (
     <div className="AccountList">
-      <h4>{AccountList.length}개의 기록이 있어요 !</h4>
+      <div className="AccountListSpanBox">
+        <h4>{AccountList.length}개의 기록이 있어요 !</h4>
+      </div>
       <div>
-        {AccountList.map((it) => (
+        {AccountList.map(it => (
           <AccountItem
             onEdit={onEdit}
             onRemove={onRemove}
@@ -25,7 +27,7 @@ function AccountList({ AccountList, onEdit, onRemove }) {
 }
 
 AccountList.defaultProps = {
-  AccountList: ["에러발생 !"],
+  AccountList: ['에러발생 !'],
 };
 
 export default AccountList;

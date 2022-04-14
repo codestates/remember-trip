@@ -82,12 +82,14 @@ function AccountEditor({ onCreate }) {
 
   return (
     <div className="AccountEditor">
-      <h2>가계부를 기록해요</h2>
-      <div>
+      <div className="AccountEditorH2Box">
+        <h2 className="AccountEditorH2">가계부를 기록해요</h2>
+      </div>
+      <div className="AccountEditorReturnDiv">
         <div className="InputFirstArea">
-          <span>{dateDiff} 일차 !</span>
+          <span>여정 {dateDiff} 일차 !</span>
           <br />
-          <span>
+          <span className="item_nameSpan">
             <input
               className="item_nameInput"
               ref={item_nameInput}
@@ -138,22 +140,26 @@ function AccountEditor({ onCreate }) {
         {/* <textarea ref={contentInput} value={state.content} name="content" onChange={handleChangeState} /> */}
       </div>
       <div className="InputFifthArea">
-        <label>소비 항목을 선택해요 : </label>
-        <select
-          select
-          name="category"
-          value={state.category}
-          onChange={handleChangeState}
-        >
-          <option value={'식비'}>식비</option>
-          <option value={'교통비'}>교통비</option>
-          <option value={'숙박비'}>숙박비</option>
-          <option value={'티켓'}>티켓</option>
-          <option value={'기타항목'}>기타항목</option>
-        </select>
+        <label className="InputFifthAreaLabel">소비 항목을 선택해요 : </label>
+        <span className="selectSpan">
+          <select
+            className="select"
+            name="category"
+            value={state.category}
+            onChange={handleChangeState}
+          >
+            <option value={'식비'}>식비</option>
+            <option value={'교통비'}>교통비</option>
+            <option value={'숙박비'}>숙박비</option>
+            <option value={'티켓'}>티켓</option>
+            <option value={'기타항목'}>기타항목</option>
+          </select>
+        </span>
       </div>
-      <div className="InputLsatArea">
-        <button onClick={handleSubmit}>✏️</button>
+      <div className="InputLastArea">
+        <button className="InputLastAreaBtn" onClick={handleSubmit}>
+          ✏️
+        </button>
       </div>
     </div>
   );
