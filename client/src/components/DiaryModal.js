@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import DiaryEditor from './DiaryEditor';
+
+let DiaryModalBtnAnimation = keyframes`
+  50% {top: 0; opacity: 1}
+  100% {top: -300px; opacity: 0}
+  `;
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -12,69 +17,51 @@ export const ModalBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: grid;
   place-items: center;
-  min-width: 500px;
 `;
 
 export const ModalContainer = styled.div`
-  height: 15rem;
+  margin-top: 10px;
   text-align: center;
-  margin: 50px auto;
+  background-color: white;
 `;
 
 export const ModalBtn = styled.button`
-  background-color: #ffffff;
+  outline: none;
+  background-color: white;
   text-decoration: none;
   font-size: 40px;
   border: none;
-  margin: 70px auto;
   padding: 20px;
   color: white;
   border-radius: 30px;
   cursor: grab;
+  animation-name: ${DiaryModalBtnAnimation};
+  animation-duration: 1.5s;
 `;
 
-export const ModalView = styled.div.attrs(props => ({
-  // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있습니다.
-  role: 'dialog',
-}))`
-  border-radius: 10px;
-  background-color: #ffffff;
-  width: 80%;
-  height: 80%;
-  min-width: 700px;
-}
-
-  > span.close-btn {
-    margin-top: 5px;
-    cursor: pointer;
-  }
-
-  > div.desc {
-    margin-top: 25px;
-    color: 7c98bc;
-  }
-`;
-
-function DiaryModal({ onCreate }) {
+function DiaryModal({ onCreate, openModalHandler }) {
   const [isOpen, setIsOpen] = useState(false);
-  const openModalHandler = () => {
+  function openModalHandler() {
     setIsOpen(!isOpen);
-  };
+  }
   return (
     <ModalContainer>
       <ModalBtn onClick={openModalHandler}>
-        {isOpen === false ? '✏️' : 'Opened!'}
+        {isOpen === false ? '📝' : '📝'}
       </ModalBtn>
       {isOpen === true ? (
         <ModalBackdrop onClick={openModalHandler}>
-          <ModalView onClick={e => e.stopPropagation()}>
-            <span onClick={openModalHandler} className="close-btn">
-              &times;
-            </span>
-            <div className="desc">
-              <DiaryEditor onCreate={onCreate} />
+          <div className="DiaryModalview" onClick={e => e.stopPropagation()}>
+            <div className="DiaryModalviewSpanBtn">
+              <span onClick={openModalHandler}>&times;</span>
             </div>
-          </ModalView>
+            <div className="DiaryModalviewDesc">
+              <DiaryEditor
+                onCreate={onCreate}
+                openModalHandler={openModalHandler}
+              />
+            </div>
+          </div>
         </ModalBackdrop>
       ) : null}
     </ModalContainer>

@@ -7,7 +7,9 @@ function DiaryList({ diaryList, onEdit, onRemove }) {
   return (
     <div className="DiaryList">
       <h2>{`${context.state.tripList[0].country} 에서의 일기리스트`}</h2>
-      <h4>{diaryList.length}개의 기록이 있어요 !</h4>
+      <div className="DiaryListSpanBox">
+        <span>{diaryList.length}</span> <span>개의 기록이 있어요 !</span>
+      </div>
       <div>
         {diaryList.map(it => (
           <DiaryItem
