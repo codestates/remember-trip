@@ -12,7 +12,6 @@ function DiaryItem({
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => {
     setIsEdit(!isEdit);
-    console.log('isEdit의 state는? ->', isEdit);
   };
   const [localContent, setLocalContent] = useState(content);
   const localContentInput = useRef();

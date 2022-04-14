@@ -14,7 +14,6 @@ function Home() {
   const context = useContext(stateContext);
 
   let subtitle;
-  console.log(context.state);
   function openModal() {
     setIsOpen(true);
   }
@@ -34,58 +33,58 @@ function Home() {
         <h1>Remember Trip</h1>
       </div>
       <div className="somediv">
-        <section class="section">
-          <div class="masthead-image" id="master-container">
-            <div class="content center">
+        <section className="section">
+          <div className="masthead-image" id="master-container">
+            <div className="content center">
               <h1 id="master">
                 <div>REMEMBER</div>
                 <div id="master-container-scroller">
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       MISSING
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       JUST GO
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       FLEX
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       LOVELY
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       FRIEND
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       FAMILY
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       NEW WORLD
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       PRESENT
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">
-                    <a class="cta-link" href="#">
+                  <div className="master-container-scroller_item">
+                    <a className="cta-link" href="#">
                       EVERYTHING
                     </a>
                   </div>
-                  <div class="master-container-scroller_item">SAVE</div>
+                  <div className="master-container-scroller_item">SAVE</div>
                 </div>
                 <div>TRIP</div>
               </h1>

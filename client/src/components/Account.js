@@ -12,6 +12,7 @@ import './Account.css';
 import { stateContext } from '../store';
 import AccountModal from './AccountModal';
 import AccountList from './AccountList';
+const { getName } = require('country-list');
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -169,19 +170,45 @@ function Account() {
     return { onCreate, onRemove, onEdit };
   }, []);
 
+  let totalPrice = context.state.tripList[0].totalPrice;
+  let totalPriceString = '';
+  let totalSpentString = '';
+  let remainingString = '';
+  if (totalPrice < 10000) {
+    totalPriceString = `${totalPrice}원`;
+  } else {
+    totalPriceString = `${totalPrice / 10000}만원`;
+  }
+  let totalSpent = 0;
+  if (accountData.length > 0) {
+    totalSpent = accountData
+      .map(el => el.price)
+      .reduce((prev, next) => prev + next, 0);
+  }
+
+  if (totalSpent < 10000) {
+    totalSpentString = `${totalSpent}원`;
+  } else {
+    totalSpentString = `${totalSpent / 10000}만원`;
+  }
+
+  if (totalPrice - totalSpent < 10000) {
+    remainingString = `${totalPrice - totalSpent}원`;
+  } else {
+    remainingString = `${(totalPrice - totalSpent) / 10000}만원`;
+  }
+
   return (
     <div className="Account">
       <div className="AccountHead">
         <div className="AccountHeadSpan">
           <div className="AccountHeadTotalMoney">
-            {`${context.state.tripList[0].country}에`}
+            {`${getName(context.state.tripList[0].country)}에`}
             <br />
-            {`총 ${
-              context.state.tripList[0].totalPrice / 10000
-            }만원을 들고갔어요`}
+            {`총 ${totalPriceString}을 들고갔어요`}
           </div>
           <div className="AccountHeadpaidMoney">
-            ✅ 사용한돈/남은돈 만들어서 글로 보여주실거면 여기에 넣어주세요 !
+            {`✅ 사용한돈${totalSpentString}/남은돈${remainingString}`}
           </div>
         </div>
         <AccountModal onCreate={onCreate} />

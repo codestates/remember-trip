@@ -56,18 +56,6 @@ function MyPage() {
       });
   };
 
-  // axios
-  //   .get('https://www.remembertrip.tk/mypage/trip', {
-  //     headers: {
-  //       Authorization: `Bearer ${context.state.accessToken}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //   .then(data => {
-  //     console.log(data.data.trips);
-  //     list.push(...data.data.trips);
-  //   });
-
   return (
     <div className="MyPage">
       {context.state.isLogIn ? (

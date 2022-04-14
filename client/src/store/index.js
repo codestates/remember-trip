@@ -86,7 +86,7 @@ function Store({ children }) {
       },
     }).then(data => {
       if (tripList.length === 0) {
-        setTripList(data.data.trips);
+        setTripList([...tripList, ...data.data.trips]);
         return;
       }
 

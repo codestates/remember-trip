@@ -29,9 +29,17 @@
 }
 
 .MyPageListBox {
-  width: 50%;
-  font-size: 30px;
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 26px;
   color: rgb(56, 119, 161);
+}
+
+.item{
+  flex: 1;
+  text-align: center;
 }
 
 .MyPageListBox:hover {

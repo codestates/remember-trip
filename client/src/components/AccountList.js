@@ -4,8 +4,6 @@ import AccountItem from './AccountItem';
 
 function AccountList({ AccountList, onEdit, onRemove }) {
   const a = new Date().toLocaleString();
-  console.log(AccountList);
-  console.log(a);
   return (
     <div className="AccountList">
       <div className="AccountListSpanBox">

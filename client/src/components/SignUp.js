@@ -128,8 +128,6 @@ function SignUp() {
       password: pwd,
     });
 
-    console.log('Id', id);
-    console.log('Password', pwd);
     navigate('/sign-in');
     onReset();
   };
